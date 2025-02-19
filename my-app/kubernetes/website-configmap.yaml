@@ -16,5 +16,3 @@ data:
         <p>This is served using NGINX from a Kubernetes ConfigMap.</p>
     </body>
     </html>
-  server.js: |
-    console.log("Server is running!");

@@ -23,4 +23,4 @@ spec:
       volumes:
         - name: website-volume
           configMap:
-            name: website-config  # The ConfigMap containing the index.html
+            name: website-config  # Link to ConfigMap for index.html
