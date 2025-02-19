@@ -24,4 +24,4 @@ spec:
       volumes:
         - name: website-content-volume
           configMap:
-            name: website-content  # The name of your ConfigMap
+            name: website-config  # The name of your ConfigMap
