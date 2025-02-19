@@ -4,7 +4,7 @@ metadata:
   name: static-website
   namespace: my-app  # Specify the namespace
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: static-website
@@ -14,7 +14,14 @@ spec:
         app: static-website
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+        - name: static-website
+          image: nginx:alpine  # Using the default NGINX image
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: website-volume
+              mountPath: /usr/share/nginx/html  # Mount path where NGINX looks for files
+      volumes:
+        - name: website-volume
+          configMap:
+            name: website-config  # This is the ConfigMap we created earlier
