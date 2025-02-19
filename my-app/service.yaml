@@ -1,8 +1,8 @@
-# my-app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: static-website
+  namespace: my-app  # Specify the namespace
 spec:
   selector:
     app: static-website

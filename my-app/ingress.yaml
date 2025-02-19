@@ -1,13 +1,13 @@
-# my-app/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: static-website-ingress
+  namespace: my-app  # Specify the namespace
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: localhost  # Update with your domain or IP
+  - host: 192.168.0.139  # Replace with your node's IP
     http:
       paths:
       - path: /

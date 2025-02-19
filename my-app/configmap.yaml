@@ -1,16 +1,12 @@
-# my-app/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: website-content
+  namespace: my-app  # Specify the namespace
 data:
   index.html: |
     <html>
-      <head>
-        <title>My Website</title>
-      </head>
       <body>
-        <h1>Welcome to My Website!</h1>
-        <p>Deployed using Kubernetes and ArgoCD!</p>
+        <h1>Hello, K3s!</h1>
       </body>
     </html>

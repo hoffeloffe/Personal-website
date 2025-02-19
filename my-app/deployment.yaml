@@ -1,10 +1,10 @@
-# my-app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: static-website
+  namespace: my-app  # Specify the namespace
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: static-website
@@ -14,31 +14,7 @@ spec:
         app: static-website
     spec:
       containers:
-        - name: nginx
-          image: nginx:alpine
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "100m"
-            limits:
-              memory: "128Mi"
-              cpu: "250m"
-          volumeMounts:
-            - name: website-content
-              mountPath: /usr/share/nginx/html
-          livenessProbe:
-            httpGet:
-              path: /index.html
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /index.html
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 5
-      volumes:
-        - name: website-content
-          configMap:
-            name: website-content
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
