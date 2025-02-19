@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: website-deployment
+  name: static-website
+  namespace: my-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: static-website
@@ -18,9 +19,9 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: website-volume
+            - name: website-content-volume
               mountPath: /usr/share/nginx/html  # NGINX default path for serving HTML
       volumes:
-        - name: website-volume
+        - name: website-content-volume
           configMap:
-            name: website-config  # Link to ConfigMap for index.html
+            name: website-content  # The name of your ConfigMap
