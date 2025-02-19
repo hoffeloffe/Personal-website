@@ -1,27 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: static-website
-  namespace: my-app  # Specify the namespace
+  name: website-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: static-website
+      app: website
   template:
     metadata:
       labels:
-        app: static-website
+        app: website
     spec:
       containers:
-        - name: static-website
-          image: nginx:alpine  # Using the default NGINX image
+        - name: website
+          image: nginx:alpine  # Using NGINX image
           ports:
             - containerPort: 80
           volumeMounts:
             - name: website-volume
-              mountPath: /usr/share/nginx/html  # Mount path where NGINX looks for files
+              mountPath: /usr/share/nginx/html  # NGINX's default web root
       volumes:
         - name: website-volume
           configMap:
-            name: website-config  # This is the ConfigMap we created earlier
+            name: website-config  # ConfigMap storing your HTML and JS files
