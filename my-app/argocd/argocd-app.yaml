@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k3s-deployments
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/hoffeloffe/homelap  # Replace with your Git repository URL
+    targetRevision: HEAD
+    path: kubernetes  # Path where YAML files (like app-deployment.yaml) are stored
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default  # Specify the namespace where the YAMLs will be applied
+  syncPolicy:
+    automated:
+      prune: true  # Remove deleted resources
+      selfHeal: true  # Automatically fix drifted resources
+    syncOptions:
+      - CreateNamespace=true  # Automatically create namespace if needed
