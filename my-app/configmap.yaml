@@ -1,0 +1,16 @@
+# my-app/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: website-content
+data:
+  index.html: |
+    <html>
+      <head>
+        <title>My Website</title>
+      </head>
+      <body>
+        <h1>Welcome to My Website!</h1>
+        <p>Deployed using Kubernetes and ArgoCD!</p>
+      </body>
+    </html>
