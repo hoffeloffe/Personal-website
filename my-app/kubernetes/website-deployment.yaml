@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: website
-          image: nginx:alpine  # Using NGINX image
+          image: nginx:alpine
           ports:
             - containerPort: 80
           volumeMounts:
             - name: website-volume
-              mountPath: /usr/share/nginx/html  # NGINX's default web root
+              mountPath: /usr/share/nginx/html  # NGINX default path for serving HTML
       volumes:
         - name: website-volume
           configMap:
-            name: website-config  # ConfigMap storing your HTML and JS files
+            name: website-config  # The ConfigMap containing the index.html
