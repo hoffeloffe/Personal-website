@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file:///home/rpi3/my-portfolio/website/src/pages/_app.tsx"],"sourcesContent":["import type { AppProps } from \"next/app\";\nimport \"@/styles/globals.css\";\nimport \"@/styles/theme.css\";\nimport \"@/styles/typography.css\";\nimport \"@/styles/animations.css\";\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return <Component {...pageProps} />;\n}\n\nexport default MyApp;\n"],"names":[],"mappings":";;;;;;;;;AAMA,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAY;IAC/C,qBAAO,qKAAC;QAAW,GAAG,SAAS;;;;;;AACjC;uCAEe","debugId":null}},
+    {"offset": {"line": 74, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 88, "column": 0}, "map": {"version":3,"sources":["file:///home/rpi3/my-portfolio/website/src/pages/index.tsx"],"sourcesContent":["import Head from \"next/head\";\n\nexport default function Home() {\n  return (\n    <>\n      <Head>\n        <title>My Portfolio</title>\n        <meta name=\"description\" content=\"Welcome to my professional portfolio.\" />\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n      </Head>\n\n      <main>\n        <h1>Welcome to My Portfolio</h1>\n        <p>This is my professional portfolio built with Next.js.</p>\n      </main>\n    </>\n  );\n}\n"],"names":[],"mappings":";;;;AAAA;;;AAEe,SAAS;IACtB,qBACE;;0BACE,qKAAC,6HAAA,CAAA,UAAI;;kCACH,qKAAC;kCAAM;;;;;;kCACP,qKAAC;wBAAK,MAAK;wBAAc,SAAQ;;;;;;kCACjC,qKAAC;wBAAK,MAAK;wBAAW,SAAQ;;;;;;;;;;;;0BAGhC,qKAAC;;kCACC,qKAAC;kCAAG;;;;;;kCACJ,qKAAC;kCAAE;;;;;;;;;;;;;;AAIX","debugId":null}},
+    {"offset": {"line": 154, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
