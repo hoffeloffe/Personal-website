@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file:///home/rpi3/my-portfolio/website/src/pages/_app.tsx"],"sourcesContent":["import type { AppProps } from \"next/app\";\nimport \"@/styles/globals.css\";\nimport \"@/styles/theme.css\";\nimport \"@/styles/typography.css\";\nimport \"@/styles/animations.css\";\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return <Component {...pageProps} />;\n}\n\nexport default MyApp;\n"],"names":[],"mappings":";;;;;;;;;AAMA,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAY;IAC/C,qBAAO,qKAAC;QAAW,GAAG,SAAS;;;;;;AACjC;uCAEe","debugId":null}},
-    {"offset": {"line": 74, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
