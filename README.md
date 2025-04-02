@@ -40,3 +40,6 @@ Run it directly with Node.js
 Use the Docker container on a single computer
 
 Set it up on multiple Raspberry Pis (though you'll need additional tools for that)
+
+# Why did i make it a image?
+My repo was to big to fetch, so i made the website a image.
