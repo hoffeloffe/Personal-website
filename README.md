@@ -6,6 +6,12 @@ A simple personal website built with React and TypeScript, packaged to run anywh
 A basic React website using TypeScript
 Docker setup that works on regular computers and Raspberry Pis
 
+# What do you need to install?
+
+```bash
+npm install -D webpack-cli
+```
+
 ## Docker Setup
 This lets you run the website in a container that works on most devices.
 
