@@ -1,35 +1,36 @@
-# Step 1: Build the app
-FROM node:18-alpine as builder
-
-# Set working directory
+# Stage 1: Build
+FROM node:18 AS builder
 WORKDIR /app
 
-# Copy the package.json and package-lock.json to the container
-COPY website/package.json website/package-lock.json ./
+# Copy package files first
+COPY app/package.json app/yarn.lock ./
 
-# Install dependencies
-RUN npm install
+# Install all dependencies (including devDependencies)
+RUN yarn install --frozen-lockfile --registry=https://registry.npmmirror.com --production=false
 
-# Copy all files into the container
-COPY . .
+# Verify Font Awesome is properly installed
+RUN ls node_modules/@fortawesome && \
+    yarn list @fortawesome
 
-# Build the app for production
-RUN npm run build
+# Copy the rest of the app
+COPY app ./
 
-# Step 2: Serve the app
-FROM node:18-alpine
+# Build the app
+RUN yarn build
 
-# Set working directory
+# Stage 2: Serve
+FROM node:18
 WORKDIR /app
-
-# Copy built app from builder stage
-COPY --from=builder /app /app
 
 # Install only production dependencies
-RUN npm install --production
+COPY app/package.json app/yarn.lock ./
+RUN yarn install --frozen-lockfile --registry=https://registry.npmmirror.com --production=true
 
-# Expose the port that the app will run on
+# Install http-server
+RUN yarn global add http-server --registry=https://registry.npmmirror.com
+
+# Copy built files from builder
+COPY --from=builder /app/dist ./dist
+
 EXPOSE 3000
-
-# Run the app
-CMD ["npm", "start"]
+CMD ["http-server", "dist", "-p", "3000"]
