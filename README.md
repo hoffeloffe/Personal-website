@@ -1,3 +1,7 @@
+# Build Image 
+
+docker buildx build --platform linux/arm64,linux/arm/v7 -t hoffeloffe/my-portfolio:latest --push .
+
 # My Personal Website
 
 A simple personal website built with React and TypeScript, packaged to run anywhere with Docker.

@@ -14,10 +14,15 @@ import {
 // Define styles as a function to handle dark/light mode
 const getStyles = (darkMode: boolean) => ({
   navbarContainer: {
-    padding: "20px 40px",
-    backgroundColor: darkMode ? "#1a1a1a" : "#ffffff",
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.5)",
+    padding: "12px 40px",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
     overflow: "visible",
+    position: "sticky" as const,
+    top: 0,
+    zIndex: 1000,
+    backdropFilter: "blur(8px)",
+    backgroundColor: darkMode ? "rgba(26, 26, 26, 0.95)" : "rgba(255, 255, 255, 0.95)",
+    borderBottom: `1px solid ${darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
   },
   navbarContent: {
     display: "flex",
@@ -91,6 +96,13 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode }) => {
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "Services", href: "#services" },
+    { name: "About", href: "#about" },
+    { name: "Projects", href: "#projects" }
+  ];
+
   const socialLinks = [
     {
       name: "GitHub",
@@ -127,7 +139,40 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
           HOFF3
         </motion.h1>
 
-        {/* Right Side: Icons and Dark Mode Toggle */}
+        {/* Center: Navigation Links */}
+        <ul style={{ 
+          ...styles.navLinks, 
+          gap: "30px",
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)"
+        }}>
+          {navItems.map((item) => (
+            <li key={item.name} style={styles.navLinkItem}>
+              <motion.a
+                href={item.href}
+                style={{
+                  ...styles.navLink,
+                  width: "auto",
+                  height: "auto",
+                  padding: "8px 16px",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "500"
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {item.name}
+              </motion.a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Right Side: Social Icons and Dark Mode Toggle */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           <ul style={styles.navLinks}>
             {socialLinks.map((link) => (
@@ -163,13 +208,10 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
           
           <motion.button
             onClick={toggleDarkMode}
-            aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             style={styles.themeToggleButton}
-            whileHover={{ 
-              scale: 1.1,
-              rotate: darkMode ? 10 : -10
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             <motion.div
               key={darkMode ? "moon" : "sun"}

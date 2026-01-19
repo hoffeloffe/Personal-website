@@ -1,36 +1,42 @@
-# Stage 1: Build
-FROM node:18 AS builder
+# Stage 1: Build the React application
+FROM node:16-alpine AS build
 WORKDIR /app
 
-# Copy package files first
-COPY app/package.json app/yarn.lock ./
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
 
-# Install all dependencies (including devDependencies)
-RUN yarn install --frozen-lockfile --registry=https://registry.npmmirror.com --production=false
+# Copy package files
+COPY app/package*.json ./
 
-# Verify Font Awesome is properly installed
-RUN ls node_modules/@fortawesome && \
-    yarn list @fortawesome
+# Install dependencies
+RUN npm ci
 
-# Copy the rest of the app
-COPY app ./
+# Copy all project files including the resume file
+COPY app/ ./
 
-# Build the app
-RUN yarn build
+# Build the React app
+RUN npm run build
 
-# Stage 2: Serve
-FROM node:18
-WORKDIR /app
+# Stage 2: Create the production image
+FROM debian:bookworm-slim
 
-# Install only production dependencies
-COPY app/package.json app/yarn.lock ./
-RUN yarn install --frozen-lockfile --registry=https://registry.npmmirror.com --production=true
+# Install nginx and clean up apt cache to reduce image size
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
-# Install http-server
-RUN yarn global add http-server --registry=https://registry.npmmirror.com
+# Create directory for the app
+RUN mkdir -p /usr/share/nginx/html
 
-# Copy built files from builder
-COPY --from=builder /app/dist ./dist
+# Copy built static files
+COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy nginx config
+COPY nginx.conf /etc/nginx/sites-available/default
+
+# Expose port 3000
 EXPOSE 3000
-CMD ["http-server", "dist", "-p", "3000"]
+
+# Start nginx with simple configuration
+CMD ["nginx", "-g", "daemon off;"]
