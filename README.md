@@ -1,8 +1,4 @@
-# Build Image 
-
-docker buildx build --platform linux/arm64,linux/arm/v7 -t hoffeloffe/my-portfolio:latest --push .
-
-# My Personal Website
+# My Personal Portfolio Website
 
 A simple personal website built with React and TypeScript, packaged to run anywhere with Docker.
 
@@ -19,13 +15,21 @@ npm install -D webpack-cli
 ## Docker Setup
 This lets you run the website in a container that works on most devices.
 
-# Build the image:
-For a Raspberry Pi then use this:
+## Building the Docker Image
+
+Build for multiple platforms (AMD64 and ARM64):
 ```bash
-docker build --platform linux/amd64,linux/arm64 -t <Image name> .
+docker buildx build --platform linux/amd64,linux/arm64 -t <your-username>/<image-name>:latest .
 ```
+
+Push to Docker Hub (optional):
 ```bash
-docker push <Image name>
+docker push <your-username>/<image-name>:latest
+```
+
+Run locally:
+```bash
+docker run -d -p 3000:3000 <your-username>/<image-name>:latest
 ```
 
 # How It's Put Together
