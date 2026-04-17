@@ -154,18 +154,10 @@ export default function Portfolio() {
   `;
 
   const HeroSection = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10rem;
-    align-items: center;
     min-height: calc(100vh - 60px);
     
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding: 2rem 5% 3rem;
+    @media (max-width: 1024px) {
       min-height: auto;
-      gap: 2rem;
     }
   `;
 
