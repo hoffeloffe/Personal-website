@@ -192,7 +192,8 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" }
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" }
   ];
 
   const socialLinks = [

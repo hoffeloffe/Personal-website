@@ -6,6 +6,7 @@ import Projects from "./components/Projects";
 import SkillLogos from "./components/SkillLogos";
 import Services from "./components/Services";
 import About from "./components/About";
+import ContactForm from "./components/Contact";
 import ImageName from "./img/mig1.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -245,6 +246,9 @@ export default function Portfolio() {
           <section id="projects">
             <Projects darkMode={darkMode} />
           </section>
+
+          {/* Contact Section */}
+          <ContactForm darkMode={darkMode} />
         </MainContent>
 
         {/* Footer */}
@@ -254,14 +258,33 @@ export default function Portfolio() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div>
-            <p>© {new Date().getFullYear()} Christian Hoffmann Thomsen. All rights reserved.</p>
+          <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+            <p style={{ fontSize: "1.1rem", fontWeight: 600, marginBottom: "8px" }}>
+              Christian Hoffmann Thomsen
+            </p>
             <p style={{ 
-              marginTop: "10px", 
               fontSize: "0.9rem", 
-              color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)" 
+              color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
+              marginBottom: "16px"
             }}>
               Full Stack Developer specializing in React, TypeScript, and C#
+            </p>
+            <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "16px" }}>
+              <a href="https://github.com/hoffeloffe" target="_blank" rel="noopener noreferrer" 
+                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
+              >GitHub</a>
+              <a href="https://www.linkedin.com/in/christian-hoffmann-thomsen-8027ba207/" target="_blank" rel="noopener noreferrer"
+                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
+              >LinkedIn</a>
+              <a href="mailto:christian.hoffmann.thomsen@gmail.com"
+                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
+              >Email</a>
+            </div>
+            <p style={{ 
+              fontSize: "0.8rem", 
+              color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" 
+            }}>
+              © {new Date().getFullYear()} All rights reserved.
             </p>
           </div>
         </Footer>
