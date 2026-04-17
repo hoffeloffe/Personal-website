@@ -3,16 +3,33 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build-and-push:
+  test:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci
+        working-directory: app
+      - run: npm run build
+        working-directory: app
 
+  build-and-push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up QEMU (for multi-arch builds)
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
@@ -33,5 +50,6 @@ jobs:
           tags: |
             hoffeloffe/my-website:latest
             hoffeloffe/my-website:${{ github.sha }}
+            hoffeloffe/my-website:build-${{ github.run_number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
