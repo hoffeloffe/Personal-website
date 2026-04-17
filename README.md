@@ -2,7 +2,7 @@
 
 A personal portfolio website built with **React**, **TypeScript**, and **styled-components**, packaged to run anywhere with Docker.
 
-**Live at:** [hoffe.dev](https://hoffe.dev)
+**Live at:** [website.hoff3.net](https://website.hoff3.net/)
 
 ## Tech Stack
 
