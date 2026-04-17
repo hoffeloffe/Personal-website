@@ -1,59 +1,95 @@
-# My Personal Portfolio Website
+# Personal Portfolio Website
 
-A simple personal website built with React and TypeScript, packaged to run anywhere with Docker.
+A personal portfolio website built with **React**, **TypeScript**, and **styled-components**, packaged to run anywhere with Docker.
 
-# What's Here
-A basic React website using TypeScript
-Docker setup that works on regular computers and Raspberry Pis
+**Live at:** [hoffe.dev](https://hoffe.dev)
 
-# What do you need to install?
+## Tech Stack
+
+- React 18 + TypeScript
+- styled-components + Tailwind CSS
+- Framer Motion for animations
+- Webpack 5 bundler
+- Docker + Nginx for production
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- npm
+
+### Install dependencies
 
 ```bash
-npm install -D webpack-cli
+cd app
+npm install
 ```
 
-## Docker Setup
-This lets you run the website in a container that works on most devices.
+### Run locally (development)
 
-## Building the Docker Image
+```bash
+npm start
+```
+
+The dev server starts at [http://localhost:9000](http://localhost:9000).
+
+### Build for production
+
+```bash
+npm run build
+```
+
+Output goes to the `app/dist` folder.
+
+## Docker
+
+### Build the image
 
 Build for multiple platforms (AMD64 and ARM64):
+
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t <your-username>/<image-name>:latest .
 ```
 
-Push to Docker Hub (optional):
-```bash
-docker push <your-username>/<image-name>:latest
-```
+### Run the container
 
-Run locally:
 ```bash
 docker run -d -p 3000:3000 <your-username>/<image-name>:latest
 ```
 
-# How It's Put Together
-The website lives in the app folder
+The site will be available at [http://localhost:3000](http://localhost:3000).
 
-Dockerfile contains instructions for packaging everything
+## Project Structure
 
-It uses a small web server (http-server) to show the site
+```
+├── app/
+│   ├── public/          # Static assets (index.html, resume PDF)
+│   ├── src/
+│   │   ├── components/  # React components (Hero, Navbar, Projects, etc.)
+│   │   ├── img/         # Images
+│   │   ├── App.tsx      # Root component
+│   │   ├── index.tsx    # Entry point
+│   │   ├── index.css    # Global styles
+│   │   └── style.ts     # Styled-components theme
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── webpack.config.js
+├── Dockerfile
+├── nginx.conf
+└── README.md
+```
 
-If You Want To Change Things
-Most of the website code is in app/src
+## Customization
 
-Styles can be modified in the CSS files
+- **Components:** Most of the UI lives in `app/src/components/`
+- **Styles:** Global CSS in `app/src/index.css`, component styles use styled-components
+- **Content:** Personal info, projects, and skills are defined in `app/src/App.tsx`
 
-The main page is in app/index.html
+## Why Docker?
 
-# Deployment Options
-You can:
+The repo was too large to fetch directly on some deployment targets (e.g. Raspberry Pi clusters), so the site is packaged as a Docker image for easy distribution.
 
-Run it directly with Node.js
+## License
 
-Use the Docker container on a single computer
-
-Set it up on multiple Raspberry Pis (though you'll need additional tools for that)
-
-# Why did i make it a image?
-My repo was to big to fetch, so i made the website a image.
+ISC

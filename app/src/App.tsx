@@ -229,7 +229,7 @@ export default function Portfolio() {
           <About darkMode={darkMode} />
           
           {/* Modern Skills Section */}
-          <div style={{ 
+          <section id="skills" aria-label="Technical Skills" style={{ 
             padding: "5rem 10%", 
             background: darkMode ? "#2a2a2a" : "#f8f8f8",
             transition: "background-color 0.5s ease"
@@ -247,7 +247,7 @@ export default function Portfolio() {
               skills={skills}
               darkMode={darkMode}
             />
-          </div>
+          </section>
 
           {/* Projects Section */}
           <section id="projects">

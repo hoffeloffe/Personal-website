@@ -128,19 +128,21 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
   const styles = getStyles(darkMode);
 
   return (
-    <div style={styles.navbarContainer}>
+    <nav aria-label="Main navigation" style={styles.navbarContainer}>
       <div style={styles.navbarContent}>
         {/* Left Side: Logo with hover effect */}
-        <motion.h1 
+        <motion.a 
+          href="#home"
           style={styles.logo}
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          aria-label="HOFF3 - Back to top"
         >
           HOFF3
-        </motion.h1>
+        </motion.a>
 
         {/* Center: Navigation Links */}
-        <ul style={{ 
+        <ul role="list" style={{ 
           ...styles.navLinks, 
           gap: "30px",
           position: "absolute",
@@ -185,6 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
                   }}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={link.name}
                   onMouseEnter={() => setHoveredIcon(link.name)}
                   onMouseLeave={() => setHoveredIcon(null)}
                   whileHover={{ 
@@ -237,6 +240,6 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
           </motion.button>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
