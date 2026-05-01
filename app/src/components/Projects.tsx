@@ -30,7 +30,7 @@ const SectionTitle = styled.h2<{ darkMode: boolean }>`
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: rgb(0, 119, 181);
+    background: linear-gradient(90deg, #00d4ff, #0099ff);
   }
 `;
 
@@ -432,7 +432,7 @@ const projectsData = [
     title: "AIDoc Fleet Deployment",
     description: "Containerized deployment and orchestration setup for the AIDoc application across multiple cloud environments.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/AIDoc-fleet-deployment`,
-    tech: [],
+    tech: ["Docker", "Kubernetes", "Fleet", "YAML"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/AIDoc-fleet-deployment",
     featured: false,
@@ -447,6 +447,90 @@ const projectsData = [
     ],
     challenges: "Designing a deployment architecture that could scale efficiently while maintaining reliability required careful consideration of resource allocation and service dependencies. I implemented auto-scaling and health checking to ensure high availability.",
     outcome: "The deployment system enables reliable scaling of the AIDoc application and simplifies the management of multiple environments."
+  },
+  {
+    id: 5,
+    title: "DevOps Monitoring Platform",
+    description: "A monitoring platform with live dashboards and REST API for tracking infrastructure and application health.",
+    image: `https://opengraph.githubassets.com/1/hoffeloffe/devops-monitoring-platform`,
+    tech: ["Python", "HTML", "Docker", "REST API"],
+    demoLink: "",
+    codeLink: "https://github.com/hoffeloffe/devops-monitoring-platform",
+    featured: true,
+    category: "backend",
+    detailedDescription: "A full-featured DevOps monitoring platform built with Python that provides live dashboards and a REST API for monitoring infrastructure health, application metrics, and system performance.",
+    keyFeatures: [
+      "Real-time monitoring dashboards",
+      "REST API for metrics collection",
+      "Dockerized deployment",
+      "Alerting and notification system",
+      "Historical data analysis"
+    ],
+    challenges: "Building a real-time monitoring system that could handle high-frequency data while maintaining responsive dashboards required careful optimization of data pipelines and efficient frontend rendering.",
+    outcome: "The platform provides reliable visibility into system health and has reduced incident response times."
+  },
+  {
+    id: 6,
+    title: "Distributed AI Cluster",
+    description: "A distributed computing cluster for running AI/ML workloads across multiple nodes with automated orchestration.",
+    image: `https://opengraph.githubassets.com/1/hoffeloffe/distributed-ai-cluster`,
+    tech: ["Python", "Shell", "Docker", "Kubernetes"],
+    demoLink: "",
+    codeLink: "https://github.com/hoffeloffe/distributed-ai-cluster",
+    featured: true,
+    category: "backend",
+    detailedDescription: "A distributed computing system designed to run AI and machine learning workloads across multiple nodes. The cluster handles task distribution, resource management, and result aggregation automatically.",
+    keyFeatures: [
+      "Multi-node task distribution",
+      "Automated resource management",
+      "Docker and Kubernetes orchestration",
+      "Support for various ML frameworks",
+      "Scalable architecture for ARM and AMD nodes"
+    ],
+    challenges: "Efficiently distributing ML workloads across heterogeneous hardware (ARM Raspberry Pis and AMD servers) while maintaining consistent performance required custom scheduling algorithms.",
+    outcome: "The cluster successfully runs distributed AI workloads and demonstrates the feasibility of affordable edge computing for ML."
+  },
+  {
+    id: 7,
+    title: "Marketing Campaign Orchestrator",
+    description: "A JavaScript application for planning, managing, and orchestrating marketing campaigns across channels.",
+    image: `https://opengraph.githubassets.com/1/hoffeloffe/marketing-campaign-orchestrator`,
+    tech: ["JavaScript", "Node.js", "HTML"],
+    demoLink: "",
+    codeLink: "https://github.com/hoffeloffe/marketing-campaign-orchestrator",
+    featured: false,
+    category: "fullstack",
+    detailedDescription: "A campaign management tool built with JavaScript for coordinating marketing efforts across multiple channels. It provides workflow automation and campaign tracking capabilities.",
+    keyFeatures: [
+      "Multi-channel campaign management",
+      "Workflow automation",
+      "Campaign performance tracking",
+      "Template management",
+      "Scheduling and publishing"
+    ],
+    challenges: "Coordinating campaigns across multiple channels with different APIs and requirements while maintaining a unified interface was the primary challenge.",
+    outcome: "The orchestrator streamlines campaign management and provides a single source of truth for marketing activities."
+  },
+  {
+    id: 8,
+    title: "Recolour Case",
+    description: "A Vue.js application for a recolouring case study, featuring interactive UI components and dynamic styling.",
+    image: `https://opengraph.githubassets.com/1/hoffeloffe/recolour-case`,
+    tech: ["Vue.js", "JavaScript", "CSS"],
+    demoLink: "",
+    codeLink: "https://github.com/hoffeloffe/recolour-case",
+    featured: false,
+    category: "frontend",
+    detailedDescription: "A frontend case study built with Vue.js demonstrating dynamic theming and recolouring capabilities. The application showcases interactive UI components with real-time style manipulation.",
+    keyFeatures: [
+      "Dynamic colour theming",
+      "Vue.js component architecture",
+      "Real-time style manipulation",
+      "Responsive design",
+      "Interactive UI components"
+    ],
+    challenges: "Implementing real-time colour manipulation while maintaining smooth performance and consistent visual output across different browsers.",
+    outcome: "A polished case study demonstrating proficiency with Vue.js and dynamic styling techniques."
   }
 ];
 

@@ -2,15 +2,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-module.exports = {
-  mode: "development",
+module.exports = (env, argv) => ({
+  mode: argv && argv.mode ? argv.mode : "production",
   entry: "./src/index.tsx",
   output: {
-    filename: "bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
     publicPath: "/",
-    assetModuleFilename: "images/[hash][ext][query]", // for images
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -18,7 +18,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { 
+        {
           from: path.resolve(__dirname, "./public/files"),
           to: "files"
         }
@@ -28,15 +28,15 @@ module.exports = {
   devServer: {
     static: [
       {
-        directory: path.resolve(__dirname, "public"), // serve static files like PDFs here
+        directory: path.resolve(__dirname, "public"),
         publicPath: "/",
       },
       {
-        directory: path.resolve(__dirname, "../public"), // serve files from parent public folder
+        directory: path.resolve(__dirname, "../public"),
         publicPath: "/",
       },
       {
-        directory: path.resolve(__dirname, "dist"), // serve bundled files here
+        directory: path.resolve(__dirname, "dist"),
         publicPath: "/",
       },
     ],
@@ -65,7 +65,7 @@ module.exports = {
         test: /\.pdf$/i,
         type: "asset/resource",
         generator: {
-          filename: "files/[name][ext]", // PDFs go to /files folder inside dist on build
+          filename: "files/[name][ext]",
         },
       },
     ],
@@ -73,4 +73,10 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-};
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+    runtimeChunk: "single",
+  },
+});

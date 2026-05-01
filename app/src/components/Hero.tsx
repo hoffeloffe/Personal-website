@@ -8,17 +8,18 @@ import { Download } from 'lucide-react';
 // Styled components for a modern, professional hero section
 const HeroContainer = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10rem;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
   padding: 0rem 10% 4rem;
   align-items: center;
   position: relative;
   min-height: 100vh;
   
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr;
     text-align: center;
-    padding: 5rem 5% 3rem;
+    padding: 3rem 5% 3rem;
+    gap: 2rem;
   }
 `;
 
