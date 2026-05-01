@@ -6,6 +6,8 @@ import Projects from "./components/Projects";
 import SkillLogos from "./components/SkillLogos";
 import Services from "./components/Services";
 import About from "./components/About";
+import Contact from "./components/Contact";
+import BackToTop from "./components/BackToTop";
 import ImageName from "./img/mig1.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -204,12 +206,16 @@ export default function Portfolio() {
   return (
     <AnimatePresence mode="wait">
       <MainContainer darkMode={darkMode}>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <header>
           <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         </header>
 
         {/* Main Content */}
         <MainContent 
+          id="main-content"
           darkMode={darkMode}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -253,6 +259,11 @@ export default function Portfolio() {
           <section id="projects">
             <Projects darkMode={darkMode} />
           </section>
+
+          {/* Contact Section */}
+          <section id="contact">
+            <Contact darkMode={darkMode} />
+          </section>
         </MainContent>
 
         {/* Footer */}
@@ -273,6 +284,9 @@ export default function Portfolio() {
             </p>
           </div>
         </Footer>
+
+        {/* Back to Top Button */}
+        <BackToTop darkMode={darkMode} />
       </MainContainer>
     </AnimatePresence>
   );

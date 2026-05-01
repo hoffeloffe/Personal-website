@@ -278,7 +278,6 @@ console.log(greet(nickname)); // Using nickname`;
       
       <HeroContainer ref={containerRef}>
         <HeroContent
-          style={{ minWidth: 750 }}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}

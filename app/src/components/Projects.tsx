@@ -28,7 +28,7 @@ const SectionTitle = styled.h2<{ darkMode: boolean }>`
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 954px;
+    width: 80px;
     height: 3px;
     background: rgb(0, 119, 181);
   }

@@ -45,7 +45,7 @@ const Title = styled(motion.h2)<{ darkMode: boolean }>`
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 954px;
+    width: 80px;
     height: 3px;
     background: linear-gradient(90deg, #00d4ff, #0099ff);
     border-radius: 2px;
