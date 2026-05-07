@@ -48,7 +48,7 @@ const skills = [
     color: "rgb(0, 0, 0)",
     category: "Frontend",
     description: "6 months experience with Next.js building server-side rendered and static React applications.",
-    tags: ["SSR", "Static Generation", "API Routes", "File-based Routing"]
+    tags: ["SSR", "API Routes", "File-based Routing"]
   },
   {
     name: "Progress 4GL",
@@ -56,7 +56,7 @@ const skills = [
     color: "rgb(86, 61, 124)",
     category: "Backend",
     description: "1.5 years of experience with Progress 4GL building business applications with optimized database operations.",
-    tags: ["Database Integration", "Business Logic", "Legacy Systems"]
+    tags: ["Database", "Business Logic", "Legacy Systems"]
   },
   {
     name: "C#",
@@ -64,7 +64,7 @@ const skills = [
     color: "rgb(104, 33, 122)",
     category: "Backend",
     description: "Experience in C# development with ASP.NET Core and Entity Framework for backend services.",
-    tags: [".NET Core", "Entity Framework", "LINQ", "Web API"]
+    tags: [".NET Core", "LINQ", "Web API"]
   },
   {
     name: "C++",
@@ -72,7 +72,7 @@ const skills = [
     color: "rgb(0, 89, 156)",
     category: "Languages",
     description: "Foundation in C++ programming with experience in performance-critical applications.",
-    tags: ["STL", "Memory Management", "Object-Oriented Programming"]
+    tags: ["STL", "OOP"]
   },
   {
     name: "Docker",
@@ -80,7 +80,7 @@ const skills = [
     color: "rgb(13, 136, 209)",
     category: "DevOps",
     description: "Experience with Docker for containerization and development environment standardization.",
-    tags: ["Containerization", "Docker Compose", "Multi-stage Builds"]
+    tags: ["Containerization"]
   },
   {
     name: "Kubernetes",
@@ -88,7 +88,7 @@ const skills = [
     color: "rgb(50, 109, 230)",
     category: "DevOps",
     description: "Knowledge of Kubernetes for container orchestration and deployment of applications.",
-    tags: ["Container Orchestration", "Helm Charts", "Deployment Strategies"]
+    tags: ["Orchestration", "Helm Charts", "Deployment Strategies"]
   },
 ];
 
