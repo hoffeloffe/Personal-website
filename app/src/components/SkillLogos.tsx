@@ -31,7 +31,7 @@ const SkillsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2.5rem;
+  gap: ${({ theme }) => theme.spacing[8]};
   margin: 0 auto;
   max-width: 1200px;
 `;
@@ -40,56 +40,63 @@ const SkillCard = styled(motion.div)<{ darkMode: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
-  padding: 1.5rem;
-  border-radius: 12px;
-  background-color: ${props => props.darkMode ? '#1a1a1a' : '#ffffff'};
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 170px;
+  padding: ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
+  background-color: ${({ theme, darkMode }) => darkMode ? theme.colors.gray[100] : theme.colors.background.elevated};
+  border: 1px solid ${({ theme }) => theme.colors.border.light};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+  transition: all ${({ theme }) => theme.transitions.base};
   
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    box-shadow: ${({ theme }) => theme.shadows.xl};
+    border-color: ${({ theme }) => theme.colors.primary[300]};
   }
 `;
 
 const IconWrapper = styled.div`
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+  font-size: 4rem;
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform ${({ theme }) => theme.transitions.base};
+  
+  ${SkillCard}:hover & {
+    transform: scale(1.1);
+  }
 `;
 
-const SkillName = styled.h3<{ darkMode: boolean }>`
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: ${props => props.darkMode ? '#ffffff' : '#1a1a1a'};
-  margin: 0;
+const SkillName = styled.h3`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin: 0 0 ${({ theme }) => theme.spacing[3]} 0;
   text-align: center;
 `;
 
 const SkillDescription = styled.p<{ darkMode: boolean }>`
-  font-size: 0.9rem;
-  color: ${props => props.darkMode ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)'};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  color: ${({ theme }) => theme.colors.text.secondary};
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: ${({ theme }) => theme.spacing[2]};
 `;
 
 const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: ${({ theme }) => theme.spacing[2]};
 `;
 
 const Tag = styled.span<{ darkMode: boolean }>`
-  font-size: 0.7rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 20px;
-  background-color: ${props => props.darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'};
-  color: ${props => props.darkMode ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)'};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  background-color: ${({ theme, darkMode }) => darkMode ? theme.colors.primary[900] : theme.colors.primary[50]};
+  color: ${({ theme, darkMode }) => darkMode ? theme.colors.primary[200] : theme.colors.primary[700]};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
 `;
 
 const CategoryFilter = styled.div`
@@ -101,24 +108,25 @@ const CategoryFilter = styled.div`
 `;
 
 const CategoryButton = styled.button<{ active: boolean; darkMode: boolean }>`
-  padding: 0.5rem 1.2rem;
-  border-radius: 30px;
-  border: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background-color: ${props => props.active 
-    ? 'rgb(0, 119, 181)' 
-    : props.darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'};
-  color: ${props => props.active 
-    ? '#ffffff' 
-    : props.darkMode ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)'};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[5]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  border: 1px solid ${({ theme, active }) => active ? 'transparent' : theme.colors.border.light};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  background-color: ${({ theme, active, darkMode }) => active 
+    ? theme.colors.primary[500] 
+    : darkMode ? theme.colors.gray[100] : theme.colors.background.elevated};
+  color: ${({ theme, active }) => active 
+    ? theme.colors.text.inverse 
+    : theme.colors.text.primary};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all ${({ theme }) => theme.transitions.base};
   
   &:hover {
-    background-color: ${props => props.active 
-      ? 'rgb(0, 119, 181)' 
-      : props.darkMode ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)'};
+    background-color: ${({ theme, active }) => active 
+      ? theme.colors.primary[600] 
+      : theme.colors.primary[50]};
+    border-color: ${({ theme, active }) => active ? 'transparent' : theme.colors.primary[200]};
   }
 `;
 
@@ -183,7 +191,7 @@ const SkillLogos: React.FC<SkillLogosProps> = ({ darkMode, skills }) => {
             <IconWrapper style={{ color: skill.color }}>
               <skill.icon />
             </IconWrapper>
-            <SkillName darkMode={darkMode}>{skill.name}</SkillName>
+            <SkillName>{skill.name}</SkillName>
             <TagsContainer>
               {skill.tags.slice(0, 2).map((tag, tagIndex) => (
                 <Tag key={tagIndex} darkMode={darkMode}>{tag}</Tag>

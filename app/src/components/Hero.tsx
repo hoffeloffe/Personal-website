@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { TypewriterText } from "./functions/TypewriterProps";
 import { CodeInput } from "./CodeInputProps";
 import { Download } from 'lucide-react';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 // Styled components for a modern, professional hero section
 const HeroContainer = styled.section`
@@ -28,12 +29,13 @@ const HeroContent = styled(motion.div)`
 `;
 
 const JobTitle = styled.div<{ darkMode: boolean }>`
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: ${props => props.darkMode ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)'};
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  color: ${({ theme }) => theme.colors.primary[600]};
   display: flex;
   align-items: center;
   min-height: 1.5rem;
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
   
   @media (max-width: 768px) {
     justify-content: center;
@@ -42,38 +44,41 @@ const JobTitle = styled.div<{ darkMode: boolean }>`
   &:before {
     content: '';
     display: inline-block;
-    width: 50px;
+    width: 40px;
     height: 2px;
-    background-color: rgb(0, 119, 181);
-    margin-right: 15px;
+    background: linear-gradient(90deg, ${({ theme }) => theme.colors.primary[500]}, ${({ theme }) => theme.colors.accent[400]});
+    margin-right: ${({ theme }) => theme.spacing[3]};
     
     @media (max-width: 768px) {
-      margin-right: 10px;
+      margin-right: ${({ theme }) => theme.spacing[2]};
     }
   }
 `;
 
 const Name = styled.h1<{ darkMode: boolean }>`
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: ${props => props.darkMode ? '#ffffff' : '#1a1a1a'};
-  line-height: 1.1;
+  font-size: ${({ theme }) => theme.typography.fontSize['5xl']};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
+  color: ${({ theme }) => theme.colors.text.primary};
+  line-height: ${({ theme }) => theme.typography.lineHeight.tight};
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
   }
   
   span {
-    color: rgb(0, 119, 181);
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.accent[500]});
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 `;
 
 const HeroBio = styled.p<{ darkMode: boolean }>`
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  color: ${props => props.darkMode ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)'};
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
+  color: ${({ theme }) => theme.colors.text.secondary};
   max-width: 600px;
   
   @media (max-width: 768px) {
@@ -96,37 +101,64 @@ const PrimaryButton = styled(motion.a)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  background: rgb(0, 119, 181);
-  color: white;
-  padding: 0.8rem 2rem;
-  border-radius: 4px;
-  font-weight: 600;
+  gap: ${({ theme }) => theme.spacing[2]};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[500]}, ${({ theme }) => theme.colors.primary[600]});
+  color: ${({ theme }) => theme.colors.text.inverse};
+  padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
   text-decoration: none;
   cursor: pointer;
   border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.shadows.base};
+  transition: all ${({ theme }) => theme.transitions.base};
+
+  &:hover {
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+    color: ${({ theme }) => theme.colors.text.inverse};
+    transform: translateY(-3px);
+    box-shadow: ${({ theme }) => theme.shadows.lg};
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary[500]};
+    outline-offset: 2px;
+  }
 `;
 
-const SecondaryButton = styled(motion.a)<{ darkMode: boolean }>`
+const SecondaryButton = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: ${props => props.darkMode ? '#ffffff' : '#1a1a1a'};
-  padding: 0.8rem 2rem;
-  border-radius: 4px;
-  font-weight: 600;
+  gap: ${({ theme }) => theme.spacing[2]};
+  background: ${({ theme }) => theme.colors.background.elevated};
+  color: ${({ theme }) => theme.colors.text.primary};
+  padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[8]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid ${props => props.darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)'};
-  transition: all 0.3s ease;
-  
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
+  transition: all ${({ theme }) => theme.transitions.base};
+
   &:hover {
-    border-color: rgb(0, 119, 181);
-    color: rgb(0, 119, 181);
+    border-color: ${({ theme }) => theme.colors.primary[400]};
+    color: ${({ theme }) => theme.colors.primary[600]};
+    background: ${({ theme }) => theme.colors.primary[50]};
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 119, 181, 0.1);
+    box-shadow: ${({ theme }) => theme.shadows.md};
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary[500]};
+    outline-offset: 2px;
   }
 
   svg {
@@ -145,67 +177,51 @@ const ImageContainer = styled(motion.div)`
   &:before {
     content: '';
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(0,119,181,0.2) 0%, rgba(0,0,0,0) 60%);
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[400]}20 0%, transparent 60%);
     z-index: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: all ${({ theme }) => theme.transitions.slow};
+  }
+  
+  &:hover:before {
+    width: 340px;
+    height: 340px;
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[400]}30 0%, transparent 70%);
   }
 `;
 
-const ProfileImage = styled.img`
+const ProfileImage = styled(motion.img)`
   width: 300px;
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid rgb(30, 30, 30);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border: 4px solid ${({ theme }) => theme.colors.background.default};
+  box-shadow: ${({ theme }) => theme.shadows.xl};
   z-index: 2;
-  pointer-events: none;
+  transition: all ${({ theme }) => theme.transitions.base};
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: ${({ theme }) => theme.shadows['2xl']};
+  }
 `;
 
 const CodeContainer = styled(motion.div)<{ darkMode: boolean }>`
-  margin-top: 2.5rem;
-  background: ${props => props.darkMode ? '#2a2a2a' : '#f8f8f8'};
-  border-radius: 8px;
-  padding: 1rem;
-  border: 1px solid ${props => props.darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'};
-`;
-
-const FloatingShapes = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  pointer-events: none;
-`;
-
-const Shape = styled.div<{ color: string; size: number; top: number; left: number; rotateSpeed: number; opacity: number }>`
-  position: absolute;
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  background: ${props => props.color};
-  opacity: ${props => props.opacity};
-  top: ${props => props.top}%;
-  left: ${props => props.left}%;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  animation: rotate ${props => props.rotateSpeed}s linear infinite;
-  pointer-events: none;
-  will-change: transform;
-  transform-origin: center;
+  margin-top: ${({ theme }) => theme.spacing[10]};
+  background: ${({ theme, darkMode }) => darkMode ? theme.colors.gray[100] : theme.colors.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  padding: ${({ theme }) => theme.spacing[6]};
+  border: 1px solid ${({ theme }) => theme.colors.border.light};
+  transition: all ${({ theme }) => theme.transitions.base};
   
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary[200]};
+    box-shadow: ${({ theme }) => theme.shadows.md};
   }
 `;
 
@@ -227,194 +243,75 @@ const greet = (name: string) => {
   return \`Hello, I'm a full-stack developer ready to help with your project!\`;
 };
 
-console.log(greet(nickname)); // Using nickname`;
+console.log(greet(nickname)); `;
   
   const [code, setCode] = useState(codeMe);
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: false, amount: 0.3 });
-  
-  // Enhanced animated shapes with more variety
-  const shapes = [
-    { color: 'rgb(0, 119, 181)', size: 80, top: 10, left: 5, rotateSpeed: 30, opacity: 0.7 },
-    { color: 'rgb(0, 119, 181)', size: 60, top: 70, left: 80, rotateSpeed: 25, opacity: 0.5 },
-    { color: 'rgb(0, 119, 181)', size: 100, top: 40, left: 90, rotateSpeed: 40, opacity: 0.3 },
-    { color: 'rgb(0, 119, 181)', size: 40, top: 20, left: 30, rotateSpeed: 35, opacity: 0.6 },
-  ];
-  
-  // Animation variants for better orchestration
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-        duration: 0.8 
-      }
-    }
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-  };
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   
 
 
   return (
-    <>
-      <FloatingShapes>
-        {shapes.map((shape, index) => (
-          <Shape 
-            key={index}
-            color={shape.color}
-            size={shape.size}
-            top={shape.top}
-            left={shape.left}
-            rotateSpeed={shape.rotateSpeed}
-            opacity={shape.opacity}
-          />
-        ))}
-      </FloatingShapes>
-      
-      <HeroContainer ref={containerRef}>
-        <HeroContent
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+    <HeroContainer ref={containerRef}>
+      <HeroContent
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
           <JobTitle darkMode={darkMode}>
             <TypewriterText
               texts={roles}
-              typingSpeed={100}
-              deletingSpeed={50}
+              typingSpeed={80}
+              deletingSpeed={40}
               pauseBeforeDelete={1500}
               pauseBeforeNext={1000}
               darkMode={darkMode}
             />
           </JobTitle>
           
-          <motion.h1 
-            style={{
-              fontSize: "3.5rem",
-              fontWeight: "700",
-              color: darkMode ? "#ffffff" : "#1a1a1a",
-              lineHeight: "1.1",
-              margin: "0 0 1.5rem 0"
-            }}
-            variants={itemVariants}
-          >
-            Hi, I'm <span style={{ color: "rgb(0, 119, 181)" }}>Christian</span>
-          </motion.h1>
+          <Name as={motion.h1} darkMode={darkMode} variants={fadeInUp}>
+            Hi, I'm <span>Christian</span>
+          </Name>
           
-          <motion.p 
-            style={{
-              fontSize: "1.1rem",
-              lineHeight: "1.6",
-              color: darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
-              maxWidth: "600px",
-              margin: "0 0 2rem 0"
-            }}
-            variants={itemVariants}
-          >
+          <HeroBio as={motion.p} darkMode={darkMode} variants={fadeInUp}>
             A passionate full-stack developer with expertise in React, TypeScript, and C#.
             I build beautiful, functional, and user-friendly web applications that solve real-world problems.
-          </motion.p>
+          </HeroBio>
           
-          <motion.div 
-            style={{
-              display: "flex",
-              gap: "1rem",
-              flexWrap: "wrap"
-            }}
-            variants={itemVariants}
-          >
-            <motion.a 
+          <HeroButtons as={motion.div} variants={fadeInUp}>
+            <PrimaryButton
               href="#projects"
-              className="primary-button"
-              whileHover={{ scale: 1.05, y: -5, backgroundColor: "rgb(0, 105, 165)" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                background: "rgb(0, 119, 181)",
-                color: "white",
-                padding: "0.8rem 2rem",
-                borderRadius: "4px",
-                fontWeight: 600,
-                textDecoration: "none",
-                cursor: "pointer",
-                border: "none",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
-              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               aria-label="View my projects"
             >
               View My Work
-            </motion.a>
+            </PrimaryButton>
             
-            <motion.a 
+            <SecondaryButton
               href="mailto:christian.hoffmann.thomsen@gmail.com"
-              className="primary-button"
-              whileHover={{ scale: 1.05, y: -5, backgroundColor: "rgb(0, 105, 165)" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                background: "rgb(0, 119, 181)",
-                color: "white",
-                padding: "0.8rem 2rem",
-                borderRadius: "4px",
-                fontWeight: 600,
-                textDecoration: "none",
-                cursor: "pointer",
-                border: "none",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
-              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               aria-label="Contact me via email"
             >
               Contact Me
-            </motion.a>
+            </SecondaryButton>
 
-            <motion.a 
+            <SecondaryButton
               href="/files/resume.pdf"
               download="CV Christian Hoffmann Thomsen.pdf"
-              className="primary-button"
-              whileHover={{ scale: 1.05, y: -5, backgroundColor: "rgb(0, 105, 165)" }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                background: "rgb(0, 119, 181)",
-                color: "white",
-                padding: "0.8rem 2rem",
-                borderRadius: "4px",
-                fontWeight: 600,
-                textDecoration: "none",
-                cursor: "pointer",
-                border: "none",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
-              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               aria-label="Download my resume"
             >
               <Download size={18} />
               Resume
-            </motion.a>
-          </motion.div>
+            </SecondaryButton>
+          </HeroButtons>
           
           <CodeContainer 
             darkMode={darkMode}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+            variants={fadeInUp}
           >
             <CodeInput fileName="me.tsx" value={code} onChange={setCode} />
             <h4 style={{ color: darkMode ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)', marginTop: '1rem' }}>
@@ -427,14 +324,19 @@ console.log(greet(nickname)); // Using nickname`;
         </HeroContent>
         
         <ImageContainer
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
         >
-          <ProfileImage src={imageSrc} alt="Christian - Full Stack Developer" loading="lazy" />
+          <ProfileImage 
+            src={imageSrc} 
+            alt="Christian - Full Stack Developer" 
+            loading="lazy"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.3 }}
+          />
         </ImageContainer>
       </HeroContainer>
-    </>
   );
 };
 

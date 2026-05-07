@@ -7,31 +7,21 @@ import { faArrowRight, faTimes, faTools } from "@fortawesome/free-solid-svg-icon
 
 // Define styled components for responsive layout
 const ProjectsSection = styled.section<{ darkMode: boolean }>`
-  padding: 6rem 10%;
-  background: ${props => props.darkMode ? '#1c1c1c' : '#f8f8f8'};
+  padding: ${({ theme }) => theme.spacing[24]} 10%;
+  background: ${({ theme, darkMode }) => darkMode ? theme.colors.gray[50] : theme.colors.gray[50]};
   
   @media (max-width: 768px) {
-    padding: 4rem 5%;
+    padding: ${({ theme }) => theme.spacing[16]} 5%;
   }
 `;
 
-const SectionTitle = styled.h2<{ darkMode: boolean }>`
-  font-size: 2.2rem;
-  color: ${props => props.darkMode ? '#ffffff' : '#1a1a1a'};
+const SectionTitle = styled(motion.h2)`
+  font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.text.primary};
   text-align: center;
-  margin-bottom: 3rem;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #00d4ff, #0099ff);
-  }
+  margin-bottom: ${({ theme }) => theme.spacing[12]};
+  letter-spacing: -0.02em;
 `;
 
 const ProjectFilter = styled.div`
@@ -43,17 +33,18 @@ const ProjectFilter = styled.div`
 `;
 
 const FilterButton = styled(motion.button)<{ darkMode: boolean; active: boolean }>`
-  padding: 0.5rem 1.2rem;
-  background: ${props => props.active ? 'rgb(0, 119, 181)' : props.darkMode ? '#2a2a2a' : '#ffffff'};
-  color: ${props => props.active ? '#ffffff' : props.darkMode ? '#ffffff' : '#1a1a1a'};
-  border: none;
-  border-radius: 30px;
-  font-weight: 500;
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[5]};
+  background: ${({ theme, active, darkMode }) => active ? theme.colors.primary[500] : darkMode ? theme.colors.gray[100] : theme.colors.background.elevated};
+  color: ${({ theme, active }) => active ? theme.colors.text.inverse : theme.colors.text.primary};
+  border: 1px solid ${({ theme, active }) => active ? 'transparent' : theme.colors.border.light};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all ${({ theme }) => theme.transitions.base};
   
   &:hover {
-    background: ${props => props.active ? 'rgb(0, 119, 181)' : 'rgba(0, 119, 181, 0.2)'};
+    background: ${({ theme, active }) => active ? theme.colors.primary[600] : theme.colors.primary[50]};
+    border-color: ${({ theme, active }) => active ? 'transparent' : theme.colors.primary[200]};
   }
 `;
 
@@ -72,14 +63,22 @@ const ProjectsGrid = styled.div`
 `;
 
 const ProjectCard = styled(motion.div)<{ darkMode: boolean }>`
-  background: ${props => props.darkMode ? '#2a2a2a' : '#ffffff'};
-  border-radius: 12px;
+  background: ${({ theme, darkMode }) => darkMode ? theme.colors.gray[100] : theme.colors.background.elevated};
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.shadows.base};
+  border: 1px solid ${({ theme }) => theme.colors.border.light};
   height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: all ${({ theme }) => theme.transitions.base};
+  
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.xl};
+    transform: translateY(-6px);
+    border-color: ${({ theme }) => theme.colors.primary[200]};
+  }
 `;
 
 const ProjectImage = styled(motion.div)<{ imageUrl: string }>`
@@ -186,33 +185,39 @@ const ProjectActions = styled.div`
 const ActionButton = styled(motion.a)<{ darkMode: boolean; primary?: boolean; disabled?: boolean }>`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 5px;
-  font-weight: 500;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[4]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   text-decoration: none;
-  font-size: 0.9rem;
-  background: ${props => {
-    if (props.disabled) return props.darkMode ? 'rgba(100, 100, 100, 0.3)' : 'rgba(200, 200, 200, 0.5)';
-    return props.primary ? 'rgb(0, 119, 181)' : 'transparent';
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  background: ${({ theme, primary, disabled, darkMode }) => {
+    if (disabled) return darkMode ? theme.colors.gray[700] : theme.colors.gray[200];
+    if (primary) return `linear-gradient(135deg, ${theme.colors.primary[500]}, ${theme.colors.primary[600]})`;
+    return darkMode ? theme.colors.gray[100] : theme.colors.gray[50];
   }};
-  color: ${props => {
-    if (props.disabled) return props.darkMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(100, 100, 100, 0.8)';
-    return props.primary ? '#ffffff' : props.darkMode ? '#ffffff' : '#1a1a1a';
+  color: ${({ theme, primary, disabled }) => {
+    if (disabled) return theme.colors.text.disabled;
+    if (primary) return theme.colors.text.inverse;
+    return theme.colors.text.primary;
   }};
-  border: 1px solid ${props => {
-    if (props.disabled) return props.darkMode ? 'rgba(100, 100, 100, 0.3)' : 'rgba(200, 200, 200, 0.5)';
-    return props.primary ? 'transparent' : props.darkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)';
+  border: 1px solid ${({ theme, primary, disabled }) => {
+    if (disabled) return theme.colors.border.default;
+    if (primary) return 'transparent';
+    return theme.colors.border.light;
   }};
-  transition: all 0.3s ease;
-  cursor: ${props => props.disabled ? 'default' : 'pointer'};
+  transition: all ${({ theme }) => theme.transitions.base};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   
   &:hover {
-    background: ${props => {
-      if (props.disabled) return props.darkMode ? 'rgba(100, 100, 100, 0.3)' : 'rgba(200, 200, 200, 0.5)';
-      return props.primary ? 'rgb(0, 140, 210)' : 'rgba(0, 119, 181, 0.1)';
+    background: ${({ theme, primary, disabled }) => {
+      if (disabled) return theme.colors.gray[200];
+      if (primary) return `linear-gradient(135deg, ${theme.colors.primary[600]}, ${theme.colors.primary[700]})`;
+      return theme.colors.primary[50];
     }};
-    transform: ${props => props.disabled ? 'none' : 'translateY(-3px)'};
+    border-color: ${({ theme, disabled }) => disabled ? theme.colors.border.default : theme.colors.primary[300]};
+    transform: ${props => props.disabled ? 'none' : 'translateY(-2px)'};
+    box-shadow: ${({ theme, disabled }) => disabled ? 'none' : theme.shadows.sm};
   }
 `;
 
@@ -247,25 +252,28 @@ const ModalOverlay = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: ${({ theme }) => theme.spacing[8]};
   z-index: 1000;
   overflow-y: auto;
 `;
 
 const ModalContent = styled(motion.div)<{ darkMode: boolean }>`
-  background: ${props => props.darkMode ? '#2a2a2a' : '#ffffff'};
+  background: ${({ theme, darkMode }) => darkMode ? theme.colors.gray[100] : theme.colors.background.elevated};
   max-width: 800px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius['2xl']};
   overflow: hidden;
   position: relative;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
+  box-shadow: ${({ theme }) => theme.shadows['2xl']};
+  border: 1px solid ${({ theme }) => theme.colors.border.light};
 `;
 
 const ModalCloseButton = styled.button`
@@ -554,7 +562,7 @@ interface ProjectsProps {
 
 
 
-const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
+const Projects: React.FC<ProjectsProps> = React.memo(({ darkMode }) => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState<any>(null);
   
@@ -579,7 +587,14 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   
   return (
     <ProjectsSection darkMode={darkMode} id="projects">
-      <SectionTitle darkMode={darkMode}>Featured Projects</SectionTitle>
+      <SectionTitle
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+      >
+        Featured Projects
+      </SectionTitle>
       
       <ProjectFilter>
         {categories.map(category => (
@@ -776,6 +791,8 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       </AnimatePresence>
     </ProjectsSection>
   );
-};
+});
+
+Projects.displayName = 'Projects';
 
 export default Projects;

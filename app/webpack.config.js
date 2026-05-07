@@ -76,7 +76,38 @@ module.exports = (env, argv) => ({
   optimization: {
     splitChunks: {
       chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          priority: 10,
+          reuseExistingChunk: true,
+        },
+        common: {
+          minChunks: 2,
+          priority: 5,
+          reuseExistingChunk: true,
+        },
+        // Separate chunk for large libraries
+        react: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'react',
+          priority: 20,
+        },
+        framerMotion: {
+          test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+          name: 'framer-motion',
+          priority: 15,
+        },
+      },
     },
     runtimeChunk: "single",
+    minimize: argv.mode === 'production',
+    usedExports: true, // Tree shaking
+  },
+  performance: {
+    hints: argv.mode === 'production' ? 'warning' : false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
 });

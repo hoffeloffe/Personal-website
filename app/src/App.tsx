@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./style";
+import { theme, darkTheme } from "./theme/theme";
 import { Navbar } from "./components/Navbar";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import SkillLogos from "./components/SkillLogos";
-import Services from "./components/Services";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import BackToTop from "./components/BackToTop";
+import LoadingSpinner from "./components/LoadingSpinner";
 import ImageName from "./img/mig1.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -21,34 +19,13 @@ import {
   SiProgress
 } from 'react-icons/si';
 
-const roles = ["Full‑Stack Developer", "React Specialist", "C# Developer", "Problem Solver"];
+// Lazy load heavy components for better initial load performance
+const Projects = lazy(() => import("./components/Projects"));
+const SkillLogos = lazy(() => import("./components/SkillLogos"));
+const Services = lazy(() => import("./components/Services"));
+const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
 
-const codeMe = `const name: string = 'Christian';
-const age: number = 25;
-const isDeveloper: boolean = true;
-const skills: string[] = ['React', 'TypeScript', 'Node.js'];
-
-const greet = (name: string) => {
-  return \`Hello, there! Welcome to my portfolio!\`;
-};
-
-console.log(greet(name));`;
-
-const bio = `I'm a passionate web developer dedicated to crafting clean, efficient, and user-friendly digital experiences. From dynamic websites to solving complex technical challenges, I love transforming ideas into functional, elegant solutions. Let’s collaborate and build something incredible together!`;
-
-const experience = `
-With a computer science degree from Dania and hands-on experience as an Application Developer and Frontend Developer at PICIT, I’ve built expertise in:
-
-Full-Stack Development (TypeScript, C#, C++, Progress 4GL)
-
-System Integration (RESTful APIs, Docker, Kubernetes)
-
-Optimization & Scalability (performance tuning, cloud-native solutions)
-
-I thrive on transforming complex challenges into efficient, scalable systems—whether designing transport modules, troubleshooting integrations, or crafting intuitive web interfaces. My approach blends analytical problem-solving with a passion for emerging tech, ensuring solutions are both innovative and practical.
-
-Let’s connect and build something impactful.
-`;
 const skills = [
   {
     name: "React",
@@ -117,17 +94,17 @@ const skills = [
 ];
 
 const MainContainer = styled.div`
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: ${({ theme }) => theme.colors.background.default};
+  color: ${({ theme }) => theme.colors.text.primary};
   min-height: 100vh;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color ${({ theme }) => theme.transitions.base}, color ${({ theme }) => theme.transitions.base};
   overflow-x: hidden;
 `;
 
 const MainContent = styled(motion.main)`
   margin-top: 0;
-  background-color: var(--bg-primary);
-  transition: background-color 0.5s ease;
+  background-color: ${({ theme }) => theme.colors.background.default};
+  transition: background-color ${({ theme }) => theme.transitions.base};
 `;
 
 const HeroSection = styled.div`
@@ -139,17 +116,43 @@ const HeroSection = styled.div`
 `;
 
 const Footer = styled(motion.footer)`
-  padding: 30px 40px;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+  padding: ${({ theme }) => theme.spacing[8]} ${({ theme }) => theme.spacing[10]};
+  color: ${({ theme }) => theme.colors.text.primary};
+  background-color: ${({ theme }) => theme.colors.background.default};
   text-align: center;
-  transition: background-color 0.5s ease, color 0.5s ease;
-  border-top: 1px solid rgba(127, 127, 127, 0.15);
+  transition: background-color ${({ theme }) => theme.transitions.base}, color ${({ theme }) => theme.transitions.base};
+  border-top: 1px solid ${({ theme }) => theme.colors.border.light};
+`;
+
+const SkillsSection = styled.section`
+  padding: 5rem 10%;
+  background: ${({ theme }) => theme.colors.background.paper};
+  transition: background-color ${({ theme }) => theme.transitions.slow};
+
+  h2 {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+`;
+
+const FooterText = styled.p`
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-bottom: 16px;
+`;
+
+const FooterLink = styled.a`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  text-decoration: none;
+  font-size: 0.85rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary[500]};
+  }
 `;
 
 export default function Portfolio() {
-  const [code, setCode] = useState(codeMe);
   const [darkMode, setDarkMode] = useState<boolean>(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -160,69 +163,76 @@ export default function Portfolio() {
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         setDarkMode(prefersDark);
       }
+      initializedRef.current = true;
     }
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-    document.body.classList.toggle("dark", darkMode);
+    if (!initializedRef.current) return;
     localStorage.setItem("darkMode", darkMode.toString());
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
-    <AnimatePresence mode="wait">
-      <MainContainer>
-        <a href="#main-content" className="skip-to-content">
-          Skip to main content
-        </a>
-        <header>
-          <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        </header>
+    <ThemeProvider theme={darkMode ? darkTheme : theme}>
+      <GlobalStyle />
+      <AnimatePresence mode="wait">
+        <MainContainer>
+          <a href="#main-content" className="skip-to-content">
+            Skip to main content
+          </a>
+          <header>
+            <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          </header>
 
-        <MainContent
-          id="main-content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <section id="home">
-            <HeroSection>
-              <Hero darkMode={darkMode} imageSrc={ImageName} />
-            </HeroSection>
-          </section>
+          <MainContent
+            id="main-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <section id="home">
+              <HeroSection>
+                <Hero darkMode={darkMode} imageSrc={ImageName} />
+              </HeroSection>
+            </section>
 
-          <Services darkMode={darkMode} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Services darkMode={darkMode} />
+            </Suspense>
 
-          <About darkMode={darkMode} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <About darkMode={darkMode} />
+            </Suspense>
 
-          <section id="skills" aria-label="Technical Skills" style={{
-            padding: "5rem 10%",
-            background: darkMode ? "#2a2a2a" : "#f8f8f8",
-            transition: "background-color 0.5s ease"
-          }}>
+          <SkillsSection id="skills" aria-label="Technical Skills">
             <h2 style={{
               fontSize: "2.2rem",
-              color: darkMode ? "#ffffff" : "#1a1a1a",
               textAlign: "center",
               marginBottom: "3rem",
               position: "relative"
             }}>
               My Technical Skills
             </h2>
-            <SkillLogos
-              skills={skills}
-              darkMode={darkMode}
-            />
-          </section>
+            <Suspense fallback={<LoadingSpinner />}>
+              <SkillLogos
+                skills={skills}
+                darkMode={darkMode}
+              />
+            </Suspense>
+          </SkillsSection>
 
           <section id="projects">
-            <Projects darkMode={darkMode} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Projects darkMode={darkMode} />
+            </Suspense>
           </section>
 
           <section id="contact">
-            <Contact darkMode={darkMode} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Contact darkMode={darkMode} />
+            </Suspense>
           </section>
         </MainContent>
 
@@ -235,27 +245,16 @@ export default function Portfolio() {
             <p style={{ fontSize: "1.1rem", fontWeight: 600, marginBottom: "8px" }}>
               Christian Hoffmann Thomsen
             </p>
-            <p style={{
-              fontSize: "0.9rem",
-              color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)",
-              marginBottom: "16px"
-            }}>
+            <FooterText>
               Full Stack Developer specializing in React, TypeScript, and C#
-            </p>
+            </FooterText>
             <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "16px" }}>
-              <a href="https://github.com/hoffeloffe" target="_blank" rel="noopener noreferrer"
-                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
-              >GitHub</a>
-              <a href="https://www.linkedin.com/in/christian-hoffmann-thomsen-8027ba207/" target="_blank" rel="noopener noreferrer"
-                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
-              >LinkedIn</a>
-              <a href="mailto:christian.hoffmann.thomsen@gmail.com"
-                style={{ color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)", textDecoration: "none", fontSize: "0.85rem" }}
-              >Email</a>
+              <FooterLink href="https://github.com/hoffeloffe" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>
+              <FooterLink href="https://www.linkedin.com/in/christian-hoffmann-thomsen-8027ba207/" target="_blank" rel="noopener noreferrer">LinkedIn</FooterLink>
+              <FooterLink href="mailto:christian.hoffmann.thomsen@gmail.com">Email</FooterLink>
             </div>
             <p style={{
               fontSize: "0.8rem",
-              color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)"
             }}>
               © {new Date().getFullYear()} All rights reserved.
             </p>
@@ -266,5 +265,6 @@ export default function Portfolio() {
         <BackToTop darkMode={darkMode} />
       </MainContainer>
     </AnimatePresence>
+    </ThemeProvider>
   );
 }

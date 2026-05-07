@@ -35,7 +35,7 @@ export const CodeInput: React.FC<CodeInputProps> = ({ fileName, value, onChange 
         onChange={(e) => onChange(e.target.value)}
         style={{
           width: "100%",
-          height: "200px",
+          height: "210px",
           fontFamily: "monospace",
           fontSize: "14px",
           backgroundColor: "#282c34",

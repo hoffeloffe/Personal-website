@@ -48,25 +48,17 @@ header {
   text-align: center;
 }
 
-
-.about-text, .project-card {
-  opacity: 0;
-}
-
+/* Remove old project card styles - now handled by Card component */
 .project-card {
-  background-color: #fff;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
 }
 
 .projects {
   display: flex;
   justify-content: space-around;
 }
-  
-  /* Fade-in animation */
+
+/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -17,17 +17,18 @@ import {
 /* ── Styled components ── */
 
 const NavContainer = styled.nav<{ darkMode: boolean }>`
-  padding: 12px 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[10]};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(8px);
-  background-color: ${p => p.darkMode ? "rgba(26,26,26,0.95)" : "rgba(255,255,255,0.95)"};
-  border-bottom: 1px solid ${p => p.darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"};
+  backdrop-filter: blur(12px);
+  background-color: ${({ theme, darkMode }) => darkMode ? "rgba(15,23,42,0.95)" : "rgba(255,255,255,0.95)"};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border.light};
+  transition: all ${({ theme }) => theme.transitions.base};
 
   @media (max-width: 768px) {
-    padding: 12px 20px;
+    padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[5]};
   }
 `;
 
@@ -232,8 +233,8 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
               fontWeight: 700,
               textDecoration: "none"
             }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
             aria-label="HOFF3 - Back to top"
           >
             HOFF3
@@ -254,10 +255,10 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
                     fontWeight: 500
                   }}
                   whileHover={{
-                    scale: 1.05,
-                    backgroundColor: darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)"
+                    scale: 1.02,
+                    backgroundColor: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)"
                   }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 >
                   {item.name}
                 </motion.a>
@@ -287,8 +288,8 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
                     aria-label={link.name}
                     onMouseEnter={() => setHoveredIcon(link.name)}
                     onMouseLeave={() => setHoveredIcon(null)}
-                    whileHover={{ scale: 1.15, y: -3 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
                     <FontAwesomeIcon
                       icon={link.icon}
@@ -317,8 +318,8 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode = true, toggleDarkMode 
                 alignItems: "center",
                 justifyContent: "center"
               }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               <FontAwesomeIcon

@@ -5,35 +5,40 @@ import { ChevronUp } from 'lucide-react';
 
 const BackToTopButton = styled(motion.button)<{ darkMode: boolean }>`
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: ${({ theme }) => theme.spacing[8]};
+  right: ${({ theme }) => theme.spacing[8]};
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: rgb(0, 119, 181);
-  color: white;
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[500]}, ${({ theme }) => theme.colors.primary[600]});
+  color: ${({ theme }) => theme.colors.text.inverse};
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
+  box-shadow: ${({ theme }) => theme.shadows.lg};
   z-index: 999;
-  transition: all 0.3s ease;
+  transition: all ${({ theme }) => theme.transitions.base};
   
   &:hover {
-    background: rgb(0, 140, 210);
-    box-shadow: 0 6px 16px rgba(0, 119, 181, 0.6);
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary[600]}, ${({ theme }) => theme.colors.primary[700]});
+    box-shadow: ${({ theme }) => theme.shadows.xl};
+    transform: translateY(-2px);
   }
   
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary[500]};
+    outline-offset: 2px;
   }
   
   @media (max-width: 768px) {
-    bottom: 1.5rem;
-    right: 1.5rem;
+    bottom: ${({ theme }) => theme.spacing[6]};
+    right: ${({ theme }) => theme.spacing[6]};
     width: 45px;
     height: 45px;
   }
@@ -78,8 +83,8 @@ const BackToTop: React.FC<BackToTopProps> = ({ darkMode }) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           aria-label="Back to top"
         >
           <ChevronUp size={24} />
