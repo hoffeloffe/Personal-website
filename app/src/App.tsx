@@ -24,7 +24,6 @@ const Projects = lazy(() => import("./components/Projects"));
 const SkillLogos = lazy(() => import("./components/SkillLogos"));
 const Services = lazy(() => import("./components/Services"));
 const About = lazy(() => import("./components/About"));
-const Contact = lazy(() => import("./components/Contact"));
 
 const skills = [
   {
@@ -229,11 +228,6 @@ export default function Portfolio() {
             </Suspense>
           </section>
 
-          <section id="contact">
-            <Suspense fallback={<LoadingSpinner />}>
-              <Contact darkMode={darkMode} />
-            </Suspense>
-          </section>
         </MainContent>
 
         <Footer
