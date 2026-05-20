@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { fadeInUp } from '../utils/animations';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
   faGithub, 

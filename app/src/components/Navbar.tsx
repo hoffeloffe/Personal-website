@@ -23,7 +23,7 @@ const NavContainer = styled.nav<{ darkMode: boolean }>`
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(12px);
-  background-color: ${({ theme, darkMode }) => darkMode ? "rgba(15,23,42,0.95)" : "rgba(255,255,255,0.95)"};
+  background-color: ${({ darkMode }) => darkMode ? "rgba(15,23,42,0.95)" : "rgba(255,255,255,0.95)"};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border.light};
   transition: all ${({ theme }) => theme.transitions.base};
 

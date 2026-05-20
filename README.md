@@ -1,94 +1,61 @@
-# Personal Portfolio Website
+# Portfolio Website (Azure-Focused)
 
-A personal portfolio website built with **React**, **TypeScript**, and **styled-components**, packaged to run anywhere with Docker.
+This repository contains my portfolio app and serves as my main cloud transition case study: a Software Developer moving into Junior Cloud/DevOps on Azure.
 
-**Live at:** [website.hoff3.net](https://website.hoff3.net/)
+Deployment direction for phase 1:
+- Azure Static Web Apps for hosting
+- Bicep for infrastructure as code
+- GitHub Actions for CI/CD
+- Separate `dev` and `prod` environments
+
+The application source is under `app/`.
 
 ## Tech Stack
 
 - React 18 + TypeScript
-- styled-components + Tailwind CSS
-- Framer Motion for animations
-- Webpack 5 bundler
-- Docker + Nginx for production
+- styled-components
+- Framer Motion
+- Webpack 5
 
-## Getting Started
+## Quick Start
 
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v18 or higher)
+Prerequisites:
+- Node.js 18+
 - npm
 
-### Install dependencies
+Install and run:
 
 ```bash
 cd app
 npm install
-```
-
-### Run locally (development)
-
-```bash
 npm start
 ```
 
-The dev server starts at [http://localhost:9000](http://localhost:9000).
+Local dev server: `http://localhost:9000`
 
-### Build for production
+Production build:
 
 ```bash
 npm run build
 ```
 
-Output goes to the `app/dist` folder.
-
-## Docker
-
-### Build the image
-
-Build for multiple platforms (AMD64 and ARM64):
-
-```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t <your-username>/<image-name>:latest .
-```
-
-### Run the container
-
-```bash
-docker run -d -p 3000:3000 <your-username>/<image-name>:latest
-```
-
-The site will be available at [http://localhost:3000](http://localhost:3000).
+Build output: `app/dist`
 
 ## Project Structure
 
-```
-├── app/
-│   ├── public/          # Static assets (index.html, resume PDF)
-│   ├── src/
-│   │   ├── components/  # React components (Hero, Navbar, Projects, etc.)
-│   │   ├── img/         # Images
-│   │   ├── App.tsx      # Root component
-│   │   ├── index.tsx    # Entry point
-│   │   ├── index.css    # Global styles
-│   │   └── style.ts     # Styled-components theme
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── webpack.config.js
-├── Dockerfile
-├── nginx.conf
-└── README.md
+```text
+app/
+  public/
+  src/
+  package.json
+README.md
+plans/
 ```
 
-## Customization
+## Notes
 
-- **Components:** Most of the UI lives in `app/src/components/`
-- **Styles:** Global CSS in `app/src/index.css`, component styles use styled-components
-- **Content:** Personal info, projects, and skills are defined in `app/src/App.tsx`
-
-## Why Docker?
-
-The repo was too large to fetch directly on some deployment targets (e.g. Raspberry Pi clusters), so the site is packaged as a Docker image for easy distribution.
+- Current portfolio content is intentionally modest and evidence-based.
+- Docker-related files may remain in the repo as legacy artifacts, but they are not the primary deployment story.
 
 ## License
 

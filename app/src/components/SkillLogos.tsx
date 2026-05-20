@@ -1,16 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
-import { 
-  SiReact, 
-  SiTypescript, 
-  SiNextdotjs, 
-  SiSharp, 
-  SiCplusplus, 
-  SiDocker, 
-  SiKubernetes, 
-  SiProgress
-} from 'react-icons/si';
 import { IconType } from 'react-icons';
 
 interface SkillLogosProps {
@@ -74,13 +64,6 @@ const SkillName = styled.h3`
   color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 ${({ theme }) => theme.spacing[3]} 0;
   text-align: center;
-`;
-
-const SkillDescription = styled.p<{ darkMode: boolean }>`
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  text-align: center;
-  margin-top: ${({ theme }) => theme.spacing[2]};
 `;
 
 const TagsContainer = styled.div`

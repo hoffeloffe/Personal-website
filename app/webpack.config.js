@@ -21,6 +21,10 @@ module.exports = (env, argv) => ({
         {
           from: path.resolve(__dirname, "./public/files"),
           to: "files"
+        },
+        {
+          from: path.resolve(__dirname, "../staticwebapp.config.json"),
+          to: "staticwebapp.config.json"
         }
       ],
     }),

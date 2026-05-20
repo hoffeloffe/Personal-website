@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { 
+  SiGithubpages,
+  SiGithubactions,
   SiReact, 
-  SiSharp, 
   SiDocker, 
-  SiPostgresql,
-  SiGit
+  SiGit,
+  SiTerraform
 } from 'react-icons/si';
 import { 
   FaSyncAlt, 
@@ -222,46 +223,46 @@ const WorkStyleDesc = styled.p`
 
 const services = [
   {
+    icon: SiGithubpages,
+    color: '#0078d4',
+    title: 'Azure Static Web Apps',
+    description: 'Using Azure Static Web Apps as the primary hosting direction for this portfolio and related learning projects.',
+    tech: ['Azure', 'Static Web Apps', 'Dev Environment', 'Prod Environment']
+  },
+  {
+    icon: SiTerraform,
+    color: '#0ea5e9',
+    title: 'Infrastructure as Code (Bicep)',
+    description: 'Defining cloud resources through Bicep templates so infrastructure is versioned, reviewable, and repeatable.',
+    tech: ['Bicep', 'IaC', 'Resource Definitions', 'Environment Parity']
+  },
+  {
+    icon: SiGithubactions,
+    color: '#2088ff',
+    title: 'CI/CD with GitHub Actions',
+    description: 'Automating checks and deployment steps to keep delivery consistent across branches and environments.',
+    tech: ['GitHub Actions', 'Type Check', 'Build Validation', 'Deployment Flow']
+  },
+  {
     icon: SiReact,
     color: '#61dafb',
-    title: 'Frontend Development',
-    description: 'Building responsive, performant, and accessible user interfaces with modern React ecosystems.',
-    tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion']
-  },
-  {
-    icon: SiSharp,
-    color: '#68217a',
-    title: 'Backend Development',
-    description: 'Creating robust APIs and services with C#/.NET and Node.js, focusing on scalability and security.',
-    tech: ['C#', '.NET Core', 'Node.js', 'Entity Framework', 'REST/GraphQL']
-  },
-  {
-    icon: SiPostgresql,
-    color: '#336791',
-    title: 'Database Design',
-    description: 'Designing and optimizing database schemas for both SQL and NoSQL solutions.',
-    tech: ['PostgreSQL', 'MongoDB', 'Entity Framework', 'Database Optimization']
-  },
-  {
-    icon: SiDocker,
-    color: '#0db7ed',
-    title: 'DevOps & Deployment',
-    description: 'Containerizing applications and setting up CI/CD pipelines for reliable deployments.',
-    tech: ['Docker', 'Kubernetes', 'CI/CD', 'Cloud Deployment']
+    title: 'Frontend Delivery',
+    description: 'Building and maintaining React + TypeScript interfaces with emphasis on clarity, performance, and maintainability.',
+    tech: ['React', 'TypeScript', 'styled-components', 'Webpack']
   },
   {
     icon: SiGit,
     color: '#f05032',
-    title: 'Code Review & Consulting',
-    description: 'Providing code reviews, architecture guidance, and best practices for development teams.',
-    tech: ['Code Review', 'Architecture', 'Best Practices', 'Mentoring']
+    title: 'Documentation Discipline',
+    description: 'Keeping implementation notes and project context clear enough for recruiters, teammates, and future maintenance.',
+    tech: ['README', 'Architecture Notes', 'Change History', 'Operational Context']
   },
   {
-    icon: SiReact,
-    color: '#61dafb',
-    title: 'Full-Stack Projects',
-    description: 'Taking projects from concept to deployment with end-to-end development expertise.',
-    tech: ['End-to-End Development', 'System Design', 'Testing', 'Documentation']
+    icon: SiDocker,
+    color: '#0db7ed',
+    title: 'Practical Tooling',
+    description: 'Using Docker and other tooling when helpful, while keeping Azure Static Web Apps as the primary deployment story.',
+    tech: ['Docker Basics', 'Local Tooling', 'Build Consistency', 'Learning by Doing']
   }
 ];
 
@@ -307,12 +308,12 @@ const Services: React.FC<ServicesProps> = React.memo(({ darkMode }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         >
-          What I Offer
+          Current Focus Areas
         </Title>
         <Subtitle darkMode={darkMode}>
-          I help teams ship fast, clean, and scalable web applications. 
-          From frontend interfaces to backend APIs and deployment pipelines, 
-          I provide end-to-end development expertise.
+          This portfolio tracks my transition into Junior Cloud/DevOps on Azure.
+          The focus is practical delivery habits: infrastructure as code, CI/CD,
+          environment separation, and clear documentation.
         </Subtitle>
       </Header>
 

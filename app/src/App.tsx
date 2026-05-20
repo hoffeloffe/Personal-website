@@ -11,12 +11,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   SiReact,
   SiTypescript,
-  SiNextdotjs,
+  SiGithubpages,
+  SiGithubactions,
   SiSharp,
-  SiCplusplus,
   SiDocker,
-  SiKubernetes,
-  SiProgress
+  SiProgress,
+  SiTerraform
 } from 'react-icons/si';
 
 // Lazy load heavy components for better initial load performance
@@ -24,6 +24,7 @@ const Projects = lazy(() => import("./components/Projects"));
 const SkillLogos = lazy(() => import("./components/SkillLogos"));
 const Services = lazy(() => import("./components/Services"));
 const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
 
 const skills = [
   {
@@ -31,24 +32,40 @@ const skills = [
     icon: SiReact,
     color: "rgb(97, 218, 251)",
     category: "Frontend",
-    description: "6 months of experience with React building modern UIs with hooks, context API, and component-based architecture.",
-    tags: ["Hooks", "Components", "Context API", "React Router"]
+    description: "Hands-on React experience building portfolio and learning projects with reusable components and responsive layouts.",
+    tags: ["Components", "Hooks", "Responsive UI", "Accessibility"]
   },
   {
     name: "TypeScript",
     icon: SiTypescript,
     color: "rgb(49, 120, 198)",
     category: "Languages",
-    description: "6 months working with TypeScript focusing on type safety and interfaces for more maintainable code.",
-    tags: ["Type Safety", "Interfaces", "Typed React", "Configuration"]
+    description: "Used daily in this portfolio to keep components type-safe and easier to maintain.",
+    tags: ["Type Safety", "Interfaces", "Strict Typing", "Refactoring"]
   },
   {
-    name: "Next.js",
-    icon: SiNextdotjs,
-    color: "rgb(0, 0, 0)",
-    category: "Frontend",
-    description: "6 months experience with Next.js building server-side rendered and static React applications.",
-    tags: ["SSR", "API Routes", "File-based Routing"]
+    name: "Azure Static Web Apps",
+    icon: SiGithubpages,
+    color: "rgb(0, 120, 212)",
+    category: "Cloud",
+    description: "Learning Azure-first static hosting patterns, including environment separation for dev and prod.",
+    tags: ["Azure", "Static Hosting", "Dev/Prod", "Web App Delivery"]
+  },
+  {
+    name: "Bicep",
+    icon: SiTerraform,
+    color: "rgb(14, 165, 233)",
+    category: "Cloud",
+    description: "Building infrastructure-as-code foundations to define and repeat Azure environment setup.",
+    tags: ["IaC", "Templates", "Repeatable Infra", "Azure Resources"]
+  },
+  {
+    name: "GitHub Actions",
+    icon: SiGithubactions,
+    color: "rgb(32, 136, 255)",
+    category: "DevOps",
+    description: "Using workflow automation to enforce build and type-check discipline for portfolio delivery.",
+    tags: ["CI/CD", "Automation", "Build Validation", "Release Flow"]
   },
   {
     name: "Progress 4GL",
@@ -56,39 +73,23 @@ const skills = [
     color: "rgb(86, 61, 124)",
     category: "Backend",
     description: "1.5 years of experience with Progress 4GL building business applications with optimized database operations.",
-    tags: ["Database", "Business Logic", "Legacy Systems"]
+    tags: ["Database Integration", "Business Logic", "Legacy Systems"]
   },
   {
     name: "C#",
     icon: SiSharp,
     color: "rgb(104, 33, 122)",
     category: "Backend",
-    description: "Experience in C# development with ASP.NET Core and Entity Framework for backend services.",
-    tags: [".NET Core", "LINQ", "Web API"]
-  },
-  {
-    name: "C++",
-    icon: SiCplusplus,
-    color: "rgb(0, 89, 156)",
-    category: "Languages",
-    description: "Foundation in C++ programming with experience in performance-critical applications.",
-    tags: ["STL", "OOP"]
+    description: "Professional backend experience with C# in business applications and integrations.",
+    tags: [".NET", "Business Logic", "Integrations", "Maintainability"]
   },
   {
     name: "Docker",
     icon: SiDocker,
     color: "rgb(13, 136, 209)",
     category: "DevOps",
-    description: "Experience with Docker for containerization and development environment standardization.",
-    tags: ["Containerization"]
-  },
-  {
-    name: "Kubernetes",
-    icon: SiKubernetes,
-    color: "rgb(50, 109, 230)",
-    category: "DevOps",
-    description: "Knowledge of Kubernetes for container orchestration and deployment of applications.",
-    tags: ["Orchestration", "Helm Charts", "Deployment Strategies"]
+    description: "Basic container workflow knowledge used in side projects; currently secondary to Azure Static Web Apps.",
+    tags: ["Containers", "Local Environments", "Images", "Learning"]
   },
 ];
 
@@ -212,7 +213,7 @@ export default function Portfolio() {
               marginBottom: "3rem",
               position: "relative"
             }}>
-              My Technical Skills
+              Current Technical Focus
             </h2>
             <Suspense fallback={<LoadingSpinner />}>
               <SkillLogos
@@ -228,6 +229,11 @@ export default function Portfolio() {
             </Suspense>
           </section>
 
+          <section id="contact">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Contact darkMode={darkMode} />
+            </Suspense>
+          </section>
         </MainContent>
 
         <Footer
@@ -240,7 +246,7 @@ export default function Portfolio() {
               Christian Hoffmann Thomsen
             </p>
             <FooterText>
-              Full Stack Developer specializing in React, TypeScript, and C#
+              Software Developer transitioning into Junior Cloud/DevOps on Azure
             </FooterText>
             <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "16px" }}>
               <FooterLink href="https://github.com/hoffeloffe" target="_blank" rel="noopener noreferrer">GitHub</FooterLink>

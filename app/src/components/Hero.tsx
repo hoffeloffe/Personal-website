@@ -231,19 +231,18 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ darkMode, imageSrc }) => {
-  const roles = ["Web Developer", "Creative Thinker", "Tech Enthusiast", "Problem Solver"];
+  const roles = ["Software Developer", "Azure Cloud Learner", "Junior DevOps Transition", "CI/CD Focused"];
   
   const codeMe = `const name: string = 'Christian Hoffmann Thomsen';
-const nickname: string = 'Hoffe';
-const age: number = 25;
-const isDeveloper: boolean = true;
-const skills: string[] = ['React', 'TypeScript', 'Node.js'];
+const role: string = 'Software Developer';
+const focus: string = 'Junior Cloud/DevOps on Azure';
+const skills: string[] = ['React', 'TypeScript', 'Bicep', 'GitHub Actions'];
 
-const greet = (name: string) => {
-  return \`Hello, I'm a full-stack developer ready to help with your project!\`;
+const currentProject = () => {
+  return 'Building this portfolio as an Azure case study with dev/prod discipline.';
 };
 
-console.log(greet(nickname)); `;
+console.log(currentProject()); `;
   
   const [code, setCode] = useState(codeMe);
   const containerRef = useRef(null);
@@ -274,8 +273,8 @@ console.log(greet(nickname)); `;
           </Name>
           
           <HeroBio as={motion.p} darkMode={darkMode} variants={fadeInUp}>
-            A passionate full-stack developer with expertise in React, TypeScript, and C#.
-            I build beautiful, functional, and user-friendly web applications that solve real-world problems.
+            Software Developer transitioning into Junior Cloud/DevOps on Azure.
+            I am focused on practical infrastructure as code, CI/CD discipline, and reliable delivery from dev to prod.
           </HeroBio>
           
           <HeroButtons as={motion.div} variants={fadeInUp}>
@@ -318,7 +317,7 @@ console.log(greet(nickname)); `;
               Preview:
             </h4>
             <code style={{ color: darkMode ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }}>
-              {"Hello, I'm a full-stack developer ready to help with your project!"}
+              {"Building this portfolio as an Azure case study with dev/prod discipline."}
             </code>
           </CodeContainer>
         </HeroContent>
@@ -330,7 +329,7 @@ console.log(greet(nickname)); `;
         >
           <ProfileImage 
             src={imageSrc} 
-            alt="Christian - Full Stack Developer" 
+            alt="Christian - Software Developer transitioning into Junior Cloud/DevOps on Azure" 
             loading="lazy"
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}

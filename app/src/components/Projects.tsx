@@ -370,145 +370,145 @@ const ModalActions = styled.div`
   margin-top: 2rem;
 `;
 
-// Project data with your actual GitHub repositories
+// Project data
 const projectsData = [
   {
     id: 1,
-    title: "Personal Website",
-    description: "My personal portfolio website built with modern web technologies to showcase my skills and projects.",
+    title: "Portfolio Website (Azure Transition Case Study)",
+    description: "My main case study for learning Azure-oriented delivery with a React frontend and practical CI/CD discipline.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/Personal-website`,
-    tech: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Framer Motion"],
+    tech: ["React", "TypeScript", "styled-components", "GitHub Actions", "Azure Static Web Apps", "Bicep"],
     demoLink: "https://website.hoff3.net/",
     codeLink: "https://github.com/hoffeloffe/Personal-website",
     featured: true,
     category: "frontend",
-    detailedDescription: "This is my professional portfolio website designed to showcase my skills, experience, and projects. Built with React and TypeScript, it features a responsive design, interactive animations, and a clean, modern UI.",
+    detailedDescription: "This portfolio is intentionally used as my cloud transition project. It combines frontend delivery with a clear Azure direction: separate dev/prod environments, infrastructure as code, and repeatable deployment flow.",
     keyFeatures: [
       "Responsive design for all devices",
-      "Interactive animations with Framer Motion",
+      "Accessible navigation and section structure",
       "Dark/light mode toggle",
       "Project showcase with filterable categories",
-      "Professional timeline with employment history"
+      "Azure-first deployment documentation"
     ],
-    challenges: "Creating a portfolio that stands out while maintaining performance was a key challenge. I implemented code splitting and optimized assets to ensure fast loading times while keeping the animations smooth and engaging.",
-    outcome: "The website effectively showcases my skills and has helped me connect with potential employers and collaborators."
+    challenges: "Keeping the messaging credible while improving the implementation was the main challenge. I focused on practical engineering choices and removed unsupported claims.",
+    outcome: "A clearer portfolio narrative that better reflects my current level and my Junior Cloud/DevOps transition goals."
   },
   {
     id: 2,
     title: "Website Fleet Deployment",
-    description: "Infrastructure as code for automated deployment of my personal website across multiple environments.",
+    description: "Infrastructure repository focused on environment setup and repeatable deployment workflow for the portfolio.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/website-fleet-deployment`,
-    tech: [],
+    tech: ["Bicep", "GitHub Actions", "Azure", "Environment Config"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/website-fleet-deployment",
     featured: true,
     category: "devops",
-    detailedDescription: "This repository contains the infrastructure as code and deployment pipelines for my personal website. It uses Terraform to provision cloud resources and automates the deployment process across multiple environments.",
+    detailedDescription: "This repository is where I practice infrastructure and release flow for dev/prod environments. It is focused on clear setup, reviewable changes, and low-complexity automation.",
     keyFeatures: [
-      "Infrastructure as code with Terraform",
-      "Multi-environment setup (dev, staging, production)",
-      "Automated CI/CD pipeline",
-      "Containerized deployment with Docker",
-      "Cloud resource management"
+      "Infrastructure as code baseline",
+      "Separate environment configuration",
+      "Workflow-based validation",
+      "Deployment automation",
+      "Documented operational approach"
     ],
-    challenges: "Setting up a reliable and repeatable deployment process that works across different environments required careful planning. I designed the infrastructure to be modular and configurable, allowing for easy updates and scaling.",
-    outcome: "The deployment system provides reliable, consistent environments and significantly reduces the time required to release updates."
+    challenges: "Balancing simplicity and realism in a personal project setup required intentionally limiting scope and avoiding unnecessary platform complexity.",
+    outcome: "A stronger foundation for demonstrating practical cloud deployment habits and environment discipline."
   },
   {
     id: 3,
     title: "AIDoc",
-    description: "An AI-powered document management system for automatic document processing, analysis, and information extraction.",
+    description: "A learning project exploring document workflows, UI structure, and integration patterns in a small app.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/AIDoc`,
     tech: ["Typescript", "React", "Node.js"],
     demoLink: "https://aidoc.hoff3.net",
     codeLink: "https://github.com/hoffeloffe/AIDoc",
     featured: true,
-    category: "fullstack",
-    detailedDescription: "AIDoc is an intelligent document management system that uses machine learning to automate document processing, extract key information, and provide insights from unstructured text content.",
+    category: "misc",
+    detailedDescription: "AIDoc is an experimental project used to practice structuring a larger feature set than a simple landing page. The focus is on clean organization and iterative delivery.",
     keyFeatures: [
-      "Automated document classification",
-      "Text extraction from various document formats",
-      "Named entity recognition and information extraction",
-      "Document similarity search",
-      "User-friendly dashboard for document management"
+      "Document upload and organization flow",
+      "Basic processing pipeline structure",
+      "Project-level component organization",
+      "Simple dashboard interface",
+      "Iterative feature experimentation"
     ],
-    challenges: "Building accurate machine learning models that could work across different document types was the biggest challenge. I implemented a hybrid approach using both rule-based systems and deep learning models to achieve high accuracy.",
-    outcome: "The system has significantly reduced manual document processing time and improved information retrieval accuracy for users."
+    challenges: "Keeping scope under control while exploring multiple ideas required regular simplification and prioritization.",
+    outcome: "A useful learning sandbox that improved my confidence in handling multi-part applications."
   },
   {
     id: 4,
     title: "AIDoc Fleet Deployment",
-    description: "Containerized deployment and orchestration setup for the AIDoc application across multiple cloud environments.",
+    description: "Deployment experiments for AIDoc with a focus on repeatable release setup and environment notes.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/AIDoc-fleet-deployment`,
     tech: ["Docker", "Kubernetes", "Fleet", "YAML"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/AIDoc-fleet-deployment",
     featured: false,
     category: "devops",
-    detailedDescription: "This repository contains the Kubernetes manifests, Helm charts, and CI/CD pipelines for deploying the AIDoc application. It follows GitOps principles for infrastructure management and provides a scalable, resilient deployment architecture.",
+    detailedDescription: "This repo captures deployment experiments for AIDoc. It is used as a personal learning space to understand packaging, rollout flow, and operational tradeoffs.",
     keyFeatures: [
-      "Kubernetes-based orchestration",
-      "Helm charts for application packaging",
-      "GitOps workflow with ArgoCD",
-      "Scalable microservices architecture",
-      "Monitoring and logging infrastructure"
+      "Container-based deployment setup",
+      "Environment-specific configuration",
+      "Automation workflow drafts",
+      "Operational documentation",
+      "Incremental improvement notes"
     ],
-    challenges: "Designing a deployment architecture that could scale efficiently while maintaining reliability required careful consideration of resource allocation and service dependencies. I implemented auto-scaling and health checking to ensure high availability.",
-    outcome: "The deployment system enables reliable scaling of the AIDoc application and simplifies the management of multiple environments."
+    challenges: "Evaluating several deployment approaches without overengineering required strict scope limits and clear success criteria.",
+    outcome: "A better understanding of deployment fundamentals that informs my Azure-focused workflow decisions."
   },
   {
     id: 5,
     title: "DevOps Monitoring Platform",
-    description: "A monitoring platform with live dashboards and REST API for tracking infrastructure and application health.",
+    description: "A monitoring-oriented learning project for collecting metrics and visualizing system status.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/devops-monitoring-platform`,
     tech: ["Python", "HTML", "Docker", "REST API"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/devops-monitoring-platform",
     featured: true,
-    category: "backend",
-    detailedDescription: "A full-featured DevOps monitoring platform built with Python that provides live dashboards and a REST API for monitoring infrastructure health, application metrics, and system performance.",
+    category: "devops",
+    detailedDescription: "This project explores the basics of monitoring and status visibility in a simple, self-contained setup.",
     keyFeatures: [
-      "Real-time monitoring dashboards",
-      "REST API for metrics collection",
-      "Dockerized deployment",
-      "Alerting and notification system",
-      "Historical data analysis"
+      "Live dashboard prototype",
+      "Metrics collection endpoint",
+      "Containerized local setup",
+      "Basic alert flow experiments",
+      "Historical metrics view"
     ],
-    challenges: "Building a real-time monitoring system that could handle high-frequency data while maintaining responsive dashboards required careful optimization of data pipelines and efficient frontend rendering.",
-    outcome: "The platform provides reliable visibility into system health and has reduced incident response times."
+    challenges: "Designing a simple monitoring model without introducing too many moving parts was the biggest challenge.",
+    outcome: "A practical baseline project for understanding observability concepts before applying them in Azure environments."
   },
   {
     id: 6,
     title: "Distributed AI Cluster",
-    description: "A distributed computing cluster for running AI/ML workloads across multiple nodes with automated orchestration.",
+    description: "A homelab-style experiment with distributed workload execution across mixed hardware nodes.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/distributed-ai-cluster`,
     tech: ["Python", "Shell", "Docker", "Kubernetes"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/distributed-ai-cluster",
     featured: true,
-    category: "backend",
-    detailedDescription: "A distributed computing system designed to run AI and machine learning workloads across multiple nodes. The cluster handles task distribution, resource management, and result aggregation automatically.",
+    category: "misc",
+    detailedDescription: "An experimental project used to understand distributed execution, scheduling basics, and infrastructure constraints in a low-cost setup.",
     keyFeatures: [
       "Multi-node task distribution",
-      "Automated resource management",
-      "Docker and Kubernetes orchestration",
-      "Support for various ML frameworks",
-      "Scalable architecture for ARM and AMD nodes"
+      "Mixed ARM and AMD node support",
+      "Container orchestration experiments",
+      "Job lifecycle scripting",
+      "Environment setup documentation"
     ],
-    challenges: "Efficiently distributing ML workloads across heterogeneous hardware (ARM Raspberry Pis and AMD servers) while maintaining consistent performance required custom scheduling algorithms.",
-    outcome: "The cluster successfully runs distributed AI workloads and demonstrates the feasibility of affordable edge computing for ML."
+    challenges: "Working with mixed hardware and constrained resources highlighted tradeoffs in scheduling and reliability.",
+    outcome: "A better understanding of system-level constraints and deployment complexity."
   },
   {
     id: 7,
     title: "Marketing Campaign Orchestrator",
-    description: "A JavaScript application for planning, managing, and orchestrating marketing campaigns across channels.",
+    description: "A workflow-oriented JavaScript project for managing campaign tasks and sequencing actions.",
     image: `https://opengraph.githubassets.com/1/hoffeloffe/marketing-campaign-orchestrator`,
     tech: ["JavaScript", "Node.js", "HTML"],
     demoLink: "",
     codeLink: "https://github.com/hoffeloffe/marketing-campaign-orchestrator",
     featured: false,
-    category: "fullstack",
-    detailedDescription: "A campaign management tool built with JavaScript for coordinating marketing efforts across multiple channels. It provides workflow automation and campaign tracking capabilities.",
+    category: "misc",
+    detailedDescription: "A practice project that focuses on workflow state, data flow, and lightweight automation in a small JavaScript application.",
     keyFeatures: [
       "Multi-channel campaign management",
       "Workflow automation",
@@ -516,8 +516,8 @@ const projectsData = [
       "Template management",
       "Scheduling and publishing"
     ],
-    challenges: "Coordinating campaigns across multiple channels with different APIs and requirements while maintaining a unified interface was the primary challenge.",
-    outcome: "The orchestrator streamlines campaign management and provides a single source of truth for marketing activities."
+    challenges: "Keeping the feature set manageable while preserving a clean user flow required careful trimming.",
+    outcome: "A useful exercise in turning requirements into a structured workflow UI."
   },
   {
     id: 8,
@@ -529,7 +529,7 @@ const projectsData = [
     codeLink: "https://github.com/hoffeloffe/recolour-case",
     featured: false,
     category: "frontend",
-    detailedDescription: "A frontend case study built with Vue.js demonstrating dynamic theming and recolouring capabilities. The application showcases interactive UI components with real-time style manipulation.",
+    detailedDescription: "A frontend case study built with Vue.js to explore dynamic theming, UI consistency, and interactive styling behavior.",
     keyFeatures: [
       "Dynamic colour theming",
       "Vue.js component architecture",
@@ -537,8 +537,8 @@ const projectsData = [
       "Responsive design",
       "Interactive UI components"
     ],
-    challenges: "Implementing real-time colour manipulation while maintaining smooth performance and consistent visual output across different browsers.",
-    outcome: "A polished case study demonstrating proficiency with Vue.js and dynamic styling techniques."
+    challenges: "Balancing flexibility and maintainability in a style-heavy interface while keeping interaction smooth.",
+    outcome: "A focused UI experiment that improved my frontend implementation habits."
   }
 ];
 
@@ -546,10 +546,8 @@ const projectsData = [
 const categories = [
   { id: "all", name: "All Projects" },
   { id: "frontend", name: "Frontend" },
-  { id: "fullstack", name: "Full Stack" },
-  { id: "backend", name: "Backend" },
-  { id: "devops", name: "DevOps" },
-  { id: "misc", name: "Misc" }
+  { id: "devops", name: "Cloud & DevOps" },
+  { id: "misc", name: "Learning Labs" }
 ];
 
 
@@ -593,7 +591,7 @@ const Projects: React.FC<ProjectsProps> = React.memo(({ darkMode }) => {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
       >
-        Featured Projects
+        Project Case Studies
       </SectionTitle>
       
       <ProjectFilter>

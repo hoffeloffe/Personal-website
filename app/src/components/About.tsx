@@ -135,22 +135,22 @@ const TimelineDescription = styled.p`
 const timeline = [
    {
     date: '2024 - 2025',
-    title: 'Frontend Developer',
+    title: 'Software Developer (Frontend Focus)',
     company: 'PICIT',
-    description: 'Developed responsive web interfaces using React and TypeScript. Improved user experience and performance.'
+    description: 'Built and maintained React/TypeScript UI features and collaborated on practical improvements to usability and maintainability.'
   },
   {
     date: '2023 - 2024',
     title: 'Application Developer',
     company: 'PICIT',
-    description: 'Full-stack development with Progress 4GL, C++, and system integration. Focused on transport modules and database optimization.'
+    description: 'Worked with Progress 4GL and integrations in business systems, with focus on stable delivery and everyday support tasks.'
   },
 
   {
     date: '2020 - 2023',
     title: 'Computer Science Degree',
     company: 'Dania',
-    description: 'Academy Profession degree in Computer Science with focus on software engineering, algorithms, and database systems.'
+    description: 'Academy Profession degree in Computer Science, with foundation in software development, data structures, and databases.'
   }
 ];
 
@@ -172,8 +172,8 @@ const About: React.FC<AboutProps> = React.memo(({ darkMode }) => {
           About Me
         </Title>
         <Subtitle>
-          Passionate full-stack developer with a computer science degree and hands-on experience 
-          building scalable web applications. I love turning complex problems into elegant solutions.
+          Software Developer with practical product experience, currently transitioning into
+          Junior Cloud/DevOps on Azure through hands-on infrastructure and delivery work.
         </Subtitle>
       </Header>
 
@@ -187,21 +187,18 @@ const About: React.FC<AboutProps> = React.memo(({ darkMode }) => {
           <BioCard $darkMode={darkMode}>
             <BioTitle>My Story</BioTitle>
             <BioText>
-              I'm a passionate full-stack developer with a computer science degree from Dania 
-              and professional experience at PICIT. My journey in software development started 
-              with a curiosity about how things work and evolved into a career focused on building 
-              impactful digital solutions.
+              I have a computer science background from Dania and hands-on development experience
+              at PICIT. My core foundation is application development, with growing focus on cloud
+              delivery practices that are useful in real teams.
             </BioText>
             <BioText>
-              I specialize in React, TypeScript, and C#, with experience across the full stack 
-              from frontend interfaces to backend APIs and database design. I'm particularly 
-              interested in system architecture, performance optimization, and creating seamless 
-              user experiences.
+              Right now I am intentionally building Azure skills around Static Web Apps,
+              infrastructure as code with Bicep, and GitHub Actions CI/CD. This portfolio is my
+              main public case study for that transition.
             </BioText>
             <BioText>
-              When I'm not coding, you'll find me exploring new technologies, contributing to 
-              open source projects, or working on personal projects that push my boundaries 
-              as a developer.
+              I value clear documentation, small repeatable improvements, and honest delivery
+              claims over broad marketing language.
             </BioText>
           </BioCard>
         </BioSection>
