@@ -19,7 +19,7 @@ param staticWebAppName string
 @description('Optional tags applied to created resources.')
 param tags object = {}
 
-module resourceGroupModule './modules/resource-group.bicep' = {
+module resourceGroup './modules/resource-group.bicep' = {
   name: 'rg-${environment}'
   params: {
     name: resourceGroupName
@@ -41,7 +41,7 @@ module staticWebApp './modules/static-web-app.bicep' = {
     })
   }
   dependsOn: [
-    resourceGroupModule
+    resourceGroup
   ]
 }
 
